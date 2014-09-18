@@ -22,7 +22,7 @@ compile with:
 javac -classpath '.:./dependencies/*' TJBatchExtractor.java
 
 run with:
-java -classpath '.:./dependencies/*' TJBatchExtractor [num_threads] [textfile] [outfile]
+java -classpath '.:./dependencies/*' TJBatchExtractor [num_threads] [textfile] [outfile] [chunk_size]
 
 */
 
@@ -61,6 +61,9 @@ class TJBatchExtractor {
   public static void main(String[] args) throws Exception {    
 
     int num_threads = Integer.parseInt(args[0]);
+    int chunk_size = 100000;
+    int total_lines_read = 0;
+    if( args.length>4 ) chunk_size = Integer.parseInt(args[4]);
     // initialise GATE - this must be done before calling any GATE APIs
     Gate.init();    
 
@@ -69,46 +72,62 @@ class TJBatchExtractor {
     List<CorpusController> applicationList = new ArrayList<CorpusController>();    
     for(int i=0;i<num_threads;++i) applicationList.add( (CorpusController)Factory.duplicate(application) );
 
-    // Create container for results
-    List<String> AnnotationResults = new ArrayList<String>();  
-    List<String> AnnotationText = new ArrayList<String>();  
-    AnnotationResults.add("Perspective_1st,Perspective_3rd,Name,Age,Cost,Height_ft,Height_in,Weight,Cup,Chest,Waist,Hip,Ethnicity,SkinColor,EyeColor,HairColor,Restriction_Type,Restriction_Ethnicity,Restriction_Age,PhoneNumber,AreaCode_State,AreaCode_Cities,Email,Url,Media");      
-    // load the document
-    System.out.print("Reading document " + args[1] + "...");
-    List<String> FileLines = new ArrayList<String>();
-    BufferedReader br = new BufferedReader(new FileReader(args[1]));
-    String fileline;
-    // read the file
-    while( (fileline = br.readLine()) != null ){
-       FileLines.add(fileline);
-    }
-    br.close();
-
-    //launch threads to process each chunk    
-    int step = (int) Math.ceil(((double) FileLines.size())/((double) num_threads));
-    List<ExtractorThread> pool = new ArrayList<ExtractorThread>();
-    for(int i=0;i<num_threads;++i){
-       pool.add( new ExtractorThread(
-          FileLines.subList(i*step,Math.min((i+1)*step,FileLines.size())),
-          applicationList.get(i),
-          i) );       
-    }
-    for(int i=0;i<num_threads;++i){ 
-      pool.get(i).t.join();
-      if(pool.get(i).results!=null) AnnotationResults.addAll(pool.get(i).results);
-      if(pool.get(i).text!=null) AnnotationText.addAll(pool.get(i).text);
-    }
-
     String outfile = "Out.csv";
     if( args.length>2 ) outfile = args[2];
     PrintWriter writer = new PrintWriter(outfile,"UTF-8");
-    for(String l : AnnotationResults) writer.println(l);
-    writer.close();
-
+    writer.println("Perspective_1st,Perspective_3rd,Name,Age,Cost,Height_ft,Height_in,Weight,Cup,Chest,Waist,Hip,Ethnicity,SkinColor,EyeColor,HairColor,Restriction_Type,Restriction_Ethnicity,Restriction_Age,PhoneNumber,AreaCode_State,AreaCode_Cities,Email,Url,Media");
+    
     outfile = "Out.txt";
     if( args.length>3 ) outfile = args[3];
     PrintWriter writer2 = new PrintWriter(outfile,"UTF-8");
-    for(String l : AnnotationText) writer2.println(l);
+    
+    // load the document
+    System.out.println("Reading document " + args[1] + "...");
+    BufferedReader br = new BufferedReader(new FileReader(args[1]));
+    Boolean done = false;
+    
+    while( !done ){
+      List<String> FileLines = new ArrayList<String>();
+      // Create container for results
+      List<String> AnnotationResults = new ArrayList<String>();  
+      List<String> AnnotationText = new ArrayList<String>();  
+	      
+      int LinesRead = 0;
+      String fileline;
+      // read the file
+      while( true ){
+	if(LinesRead >= chunk_size) break;
+	if((fileline = br.readLine()) == null){
+	  done = true;
+	  break;
+	}
+	FileLines.add(fileline);
+	LinesRead++;
+	total_lines_read++;
+      }
+
+      //launch threads to process each chunk    
+      int step = (int) Math.ceil(((double) FileLines.size())/((double) num_threads));
+      List<ExtractorThread> pool = new ArrayList<ExtractorThread>();
+      for(int i=0;i<num_threads;++i){
+	pool.add( new ExtractorThread(
+	    FileLines.subList(i*step,Math.min((i+1)*step,FileLines.size())),
+	    applicationList.get(i),
+	    i) );       
+      }
+      for(int i=0;i<num_threads;++i){ 
+	pool.get(i).t.join();
+	if(pool.get(i).results!=null) AnnotationResults.addAll(pool.get(i).results);
+	if(pool.get(i).text!=null) AnnotationText.addAll(pool.get(i).text);
+      }
+      
+      for(String l : AnnotationResults) writer.println(l);        
+      for(String l : AnnotationText) writer2.println(l);
+      System.out.println("Processed "+total_lines_read+" lines...");
+    }
+    
+    br.close();
+    writer.close();
     writer2.close();
     System.out.println("All done");
   } 
@@ -153,7 +172,7 @@ class ExtractorThread implements Runnable {
 
    // This is the entry point for the thread.
    public void run() {
-     System.out.println("Launching thread " + this.threadID);
+     //System.out.println("Launching thread " + this.threadID);
      try {
          RetObj r = ProcessRecords();         
          results = r.results;
@@ -163,7 +182,7 @@ class ExtractorThread implements Runnable {
      } catch (Exception e){
           System.out.println("Child caught exception " + e);
      }
-     System.out.println("Thread " + this.threadID + " finished.");
+     //System.out.println("Thread " + this.threadID + " finished.");
    }
 
    private RetObj ProcessRecords() throws Exception {    
@@ -177,9 +196,9 @@ class ExtractorThread implements Runnable {
     List<String> processedText = new ArrayList<String>();
     
     for(int record_num=0;record_num<this.recs.size();++record_num){
-      if( record_num % Math.ceil(((double) this.recs.size())/10.0) == 0)
+      /*if( record_num % Math.ceil(((double) this.recs.size())/10.0) == 0)
            System.out.println("Thread " + this.threadID + ": "+ ((int) ((double)record_num)/((double) this.recs.size())*100.0 ) +"% complete.");
-
+      */
 
       // first, split title from body and get embedded age in title..
       String title_age = "-1";
