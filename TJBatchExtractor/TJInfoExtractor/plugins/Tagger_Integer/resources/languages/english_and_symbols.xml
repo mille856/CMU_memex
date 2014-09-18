@@ -1,0 +1,8 @@
+<config>
+  <description>English and Symbols</description>
+  <imports>
+    <url encoding="UTF-8">symbols.xml</url>
+    <url encoding="UTF-8">english.xml</url>    
+    <url encoding="UTF-8">English_Dictionary.xml</url>
+  </imports>
+</config>

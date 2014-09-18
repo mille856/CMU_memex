@@ -1,0 +1,81 @@
+Imports: {
+  import java.math.BigInteger;  
+}
+
+Phase:costpass_service
+Input: Duration Token Integer Number Lookup Cost_Target PossibleDuration Cost PhoneNumber measurement
+Options: control = appelt negationGrouping = false
+
+Rule: CostRule_Service_L
+({Lookup.majorType == service, !Cost_Target}):tgt
+(({Token, !Integer, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,2]
+|
+({Token.kind!=word, !Integer, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,5])
+(
+   { Integer.value>=35, !Integer within Duration, !Integer within PhoneNumber, !Integer within measurement}
+):num
+({!Lookup.majorType == percent})
+-->
+{
+  AnnotationSet target = (AnnotationSet)bindings.get("tgt");
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num");
+  Annotation numAnn = (numSet == null || numSet.isEmpty()) ? null : numSet.iterator().next();
+  double num_val = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+    
+    Long start = numSet.firstNode().getOffset();
+    Long end = numSet.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "CostRule_Service_L");
+    features.put("value", num_val);
+    try {
+       features.put("target_type", doc.getContent().getContent(target.firstNode().getOffset(),target.lastNode().getOffset()).toString().toLowerCase());
+    } catch(InvalidOffsetException ioe){
+      features.put("target_type","none");
+    }
+    features.put("target_value", "none");
+    features.put("type", "service");
+    try {
+      outputAS.add(start, end, "Cost", features);
+      outputAS.add(target.firstNode(), target.lastNode(), "Cost_Target", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+
+
+Rule: CostRule_Service_R
+(
+   { Integer.value>=35, !Integer within Duration, !Integer within PhoneNumber, !Integer within measurement }
+):num
+(({Token, !Integer, !Duration, !PossibleDuration, !Lookup.majorType == service, !Lookup.majorType == percent})[0,2]
+|
+({Token.kind!=word, !Integer, !Duration, !PossibleDuration, !Lookup.majorType == service, !Lookup.majorType == percent})[0,5])
+({Lookup.majorType == service}):tgt
+-->
+{
+  AnnotationSet target = (AnnotationSet)bindings.get("tgt");
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num");
+  Annotation numAnn = (numSet == null || numSet.isEmpty()) ? null : numSet.iterator().next();
+  double num_val = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+    
+    Long start = numSet.firstNode().getOffset();
+    Long end = numSet.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "CostRule_Service_R");
+    features.put("value", num_val);
+    try{
+       features.put("target_type", doc.getContent().getContent(target.firstNode().getOffset(),target.lastNode().getOffset()).toString().toLowerCase());
+    } catch(InvalidOffsetException ioe){
+      features.put("target_type","none");
+    }
+    features.put("target_value", "none");
+    features.put("type", "service");
+    try {
+      outputAS.add(start, end, "Cost", features);
+      outputAS.add(target.firstNode(), target.lastNode(), "Cost_Target", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+

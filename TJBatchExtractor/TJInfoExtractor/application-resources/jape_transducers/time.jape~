@@ -1,0 +1,150 @@
+Imports: {
+  import java.math.BigInteger;  
+}
+
+Phase:timepass1
+Input: Integer Token Lookup
+Options: control = first
+
+Rule: TimeHour
+( {Token.string != "$"} )
+(
+  ({Integer}):num
+  ({Token.kind != word, !Integer})?
+  ({Lookup.majorType == time_unit, Lookup.minorType == hour}):unit
+):tm
+-->
+{
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num");
+  Annotation numAnn = (numSet == null || numSet.isEmpty()) ? null : numSet.iterator().next();
+  double num_val = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+    
+  if(num_val <= 24.0){
+    AnnotationSet tmSet = bindings.get("tm");
+    AnnotationSet unitSet = bindings.get("unit");    
+    Long start = tmSet.firstNode().getOffset();
+    Long end = tmSet.lastNode().getOffset(); 
+
+//     AnnotationSet toremove = inputAS.get(unitSet.firstNode().getOffset(),unitSet.lastNode().getOffset()).get("PhoneNumber");
+//     if( toremove!=null) inputAS.removeAll(toremove);
+
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("type", "hour");
+    features.put("rule", "TimeHour");
+    features.put("duration", num_val);
+    try {
+      outputAS.add(start, end, "Duration", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+  } else {
+    AnnotationSet tmSet = bindings.get("unit");  
+    Long start = tmSet.firstNode().getOffset();
+    Long end = tmSet.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("type", "hour");
+    features.put("rule", "TimeHour");
+    try {
+      features.put("duration", doc.getContent().getContent(start,end).toString().toLowerCase());
+    } catch(InvalidOffsetException ioe){
+      features.put("duration", "none");
+    }
+    try {
+      outputAS.add(start, end, "Duration", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+  }
+}
+
+Rule: TimeMinute
+( {Token.string != "$"} )
+(
+  ({Integer}):num
+  ({Token.kind != word, !Integer})?
+  ({Lookup.majorType == time_unit, Lookup.minorType == minute}):unit
+):tm
+-->
+{
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num");
+  Annotation numAnn = (numSet == null || numSet.isEmpty()) ? null : numSet.iterator().next();
+  double num_val = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+    
+  if(num_val <= 90.0){
+    AnnotationSet tmSet = bindings.get("tm");
+    AnnotationSet unitSet = bindings.get("unit");    
+    Long start = tmSet.firstNode().getOffset();
+    Long end = tmSet.lastNode().getOffset(); 
+
+//     AnnotationSet toremove = inputAS.get(unitSet.firstNode().getOffset(),unitSet.lastNode().getOffset()).get("PhoneNumber");
+//     if( toremove!=null) inputAS.removeAll(toremove);
+
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("type", "minute");
+    features.put("rule", "TimeMinute");
+    features.put("duration", num_val);
+    try {
+      outputAS.add(start, end, "Duration", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+  }
+}
+
+
+Rule: TimeDay
+( {Token.string != "$"} )
+(
+  ({Integer}):num
+  ({Token.kind != word, !Integer})?
+  ({Lookup.majorType == time_unit, Lookup.minorType == day}):unit
+):tm
+-->
+{
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num");
+  Annotation numAnn = (numSet == null || numSet.isEmpty()) ? null : numSet.iterator().next();
+  double num_val = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+    
+  if(num_val <= 1.0){
+    AnnotationSet tmSet = bindings.get("tm");
+    AnnotationSet unitSet = bindings.get("unit");    
+    Long start = tmSet.firstNode().getOffset();
+    Long end = tmSet.lastNode().getOffset(); 
+
+//     AnnotationSet toremove = inputAS.get(unitSet.firstNode().getOffset(),unitSet.lastNode().getOffset()).get("PhoneNumber");
+//     if( toremove!=null) inputAS.removeAll(toremove);
+
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "TimeDay");
+    features.put("duration", num_val);
+    try {
+      features.put("type", doc.getContent().getContent(start,end).toString().toLowerCase());
+    } catch(InvalidOffsetException ioe){
+      features.put("type", "day");
+    }
+    try {
+      outputAS.add(start, end, "Duration", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+  } else {
+    AnnotationSet tmSet = bindings.get("unit");  
+    Long start = tmSet.firstNode().getOffset();
+    Long end = tmSet.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "TimeDay");
+    try {
+      features.put("type", doc.getContent().getContent(start,end).toString().toLowerCase());
+      features.put("duration", doc.getContent().getContent(start,end).toString().toLowerCase());
+    } catch(InvalidOffsetException ioe){
+      features.put("type", "day");
+      features.put("duration", "none");
+    }
+    try {
+      outputAS.add(start, end, "Duration", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+  }
+}
+

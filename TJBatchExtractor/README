@@ -1,0 +1,31 @@
+/*
+   Project:     TJBatchExtractor
+   Author:      Kyle Miller
+   Created:     July, 2014
+   Description: a GATE application wrapper for TJInfoExtractor
+
+   Copyright (C) 2014, Carnegie Mellon University
+*/
+
+/* 
+ * This file is free software,
+ * licenced under the GNU Library General Public License, Version 3, June 2007
+ * (in the distribution as file licence.html)
+ *
+ * 
+ */
+
+#---------------------------------------------------------
+
+see: /Documentation/TJBatchExtractor.pdf for more information.
+
+#---------------------------------------------------------
+# USAGE
+
+Compile using 
+$ javac -classpath '.:./dependencies/*' TJBatchExtractor.java
+
+Run using
+$ java -classpath '.:./dependencies/*' TJBatchExtractor [num_threads] [textfile] [outfile]
+
+

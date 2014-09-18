@@ -1,0 +1,65 @@
+
+ControllerStarted: {
+  System.out.println("JAPE1 Controller started");
+  //System.out.println("JAPE1 Controller is "+controller);
+  //System.out.println("JAPE1 Corpus is "+corpus);
+  //System.out.println("JAPE1 ActionContext is "+ctx);
+  //System.out.println("JAPE1 Ontology is "+ontology);
+  //System.out.println("JAPE1 classname is "+this.getClass());
+  //throw new gate.util.GateRuntimeException();
+}
+
+ControllerFinished: {
+  System.out.println("JAPE1 Controller finished");
+  //System.out.println("JAPE1 Controller is "+controller);
+  //System.out.println("JAPE1 Corpus is "+corpus);
+  //System.out.println("JAPE1 ActionContext is "+ctx);
+  //System.out.println("JAPE1 Ontology is "+ontology);
+  //System.out.println("JAPE1: toString():");
+  //System.out.println(controller.toString());
+}
+
+ControllerAborted: {
+  System.out.println("JAPE1 Controller aborted");
+//  System.out.println("JAPE1 Throwable is "+throwable);
+  //System.out.println("JAPE1 ActionContext is "+ctx);
+  //System.out.println("JAPE1 Ontology is "+ontology);
+}
+
+
+Phase: phase1
+Options: control = once
+
+Rule: rule1
+({Token}):label
+-->
+{
+  //System.out.println("JAPE1-1 Testing the action context:");
+  //System.out.println("JAPE1-1 Corpus is "+ctx.getCorpus());
+  //System.out.println("JAPE1 Controller is "+ctx.getController());
+  //System.out.println("JAPE1 Features  "+ctx.getPRFeatures());
+  //System.out.println("JAPE1 classname "+this.getClass());
+  //System.out.println("JAPE1: toString():");
+  //System.out.println(this.toString());
+
+}
+
+
+Phase: phase2
+Options: control = once
+
+Rule: rule1
+({Token}):label
+-->
+{
+  System.out.println("JAPE1-2 Testing the action context:");
+  System.out.println("JAPE1-2 Corpus is "+ctx.getCorpus());
+  System.out.println("JAPE1 Controller is "+ctx.getController());
+  System.out.println("JAPE1 Features  "+ctx.getPRFeatures());
+  //System.out.println("JAPE1 classname "+this.getClass());
+  //System.out.println("JAPE1: toString():");
+  //System.out.println(this.toString());
+  //throw new GateRuntimeException("test exception!");
+}
+
+

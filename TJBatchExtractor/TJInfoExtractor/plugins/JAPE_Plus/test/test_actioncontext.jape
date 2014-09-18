@@ -1,0 +1,12 @@
+
+Phase: phase1
+Options: control = once
+
+Rule: rule1
+({Token}):label
+-->
+{
+  System.out.println("Testing the action context:");
+  System.out.println("Corpus is "+ctx.getCorpus());
+  System.out.println("Features  "+ctx.getPRFeatures());
+}

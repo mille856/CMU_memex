@@ -1,0 +1,11 @@
+Phase:ethnicity
+Input: Token Lookup
+Options: control = all negationGrouping = false
+
+Rule: ethnicity0
+({Token, !Token.string ==~ "(?i)no", !Lookup.minorType == massageservice})[3]
+( { Lookup.majorType == country_adj } ):eth
+({Token, !Token.string ==~ "(?i)americans", !Lookup.majorType==men, !Lookup.minorType == massageservice})
+({Token, !Lookup.majorType==men, !Lookup.minorType == massageservice})[3]
+-->
+:eth.Ethnicity = { rule = ethnicity0, ethnicity = :eth@string }

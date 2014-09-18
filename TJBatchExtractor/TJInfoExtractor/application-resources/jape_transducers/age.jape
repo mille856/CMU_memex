@@ -1,0 +1,54 @@
+/*
+   File:        age.jape
+   Author:      Kyle Miller
+   Created:     July, 2014
+   Description: a GATE JAPE file that attempts to annotate information in text
+
+   Copyright (C) 2014, Carnegie Mellon University
+*/
+/* 
+ * This file is free software,
+ * licenced under the GNU Library General Public License, Version 3, June 2007
+ * (in the distribution as file licence.html)  
+ * 
+ */
+
+Imports: {
+  import java.math.BigInteger;  
+}
+
+Phase:age
+Input: Token Integer Lookup
+Options: control = appelt
+
+Rule: ageRule1
+(
+ ({Integer}):num
+ ({Token.kind!=word, !Integer})?
+ {Lookup.majorType=="age_unit"}
+):age
+-->
+{
+  long Age =((BigInteger)((AnnotationSet)bindings.get("num")).iterator().next().getFeatures().get("value")).longValue();
+  if(Age>10){  
+  AnnotationSet Set = bindings.get("age");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "ageRule1");
+  features.put("age", Age);  
+  try {
+    outputAS.add(start, end, "Age", features);
+  } catch(InvalidOffsetException ioe){
+    throw new LuckyException(ioe);
+  }
+  }
+}
+
+Rule: ageRule2
+({Token.string ==~ "(i?)age"})
+({Token.kind!=word, !Integer})?
+({Integer}):age
+-->
+:age.Age = {rule = ageRule2, age = :age.Integer.value}
+

@@ -1,0 +1,409 @@
+AC ,State ,Principal City/Cities
+201,NJ ,Hackensack; Jersey City
+202,DC ,Washington DC
+203,CT ,New Haven; Bridgeport; NYC suburbs
+204,MB ,entire province
+205,AL ,Birmingham; Tuscaloosa
+206,WA ,Seattle
+207,ME ,entire state
+208,ID ,entire state
+209,CA ,Modesto; Stockton
+210,TX ,San Antonio
+212,NY ,New York City: Manhattan
+213,CA ,Los Angeles/inner downtown
+214,TX ,Dallas and suburbs
+215,PA ,Philadelphia
+216,OH ,Cleveland
+217,IL ,Champaign; Springfield
+218,MN ,Duluth; northern
+219,IN ,Gary; northwestern
+224,IL ,north suburbs of Chicago
+225,LA ,Baton Rouge
+226,ON ,London; Windsor; southern
+227,— ,withdrawn
+228,MS ,Biloxi; Gulfport; extreme southern tip
+229,GA ,Albany; Valdosta; southwestern
+231,MI ,Muskegon; Traverse City
+234,OH ,Akron; Canton; Youngstown
+236,BC ,entire province
+239,FL ,Ft. Myers; Naples
+240,MD ,Frederick; Washington DC suburbs
+242,— ,Bahamas (Atlantic Ocean)
+246,— ,Barbados (Caribbean)
+248,MI ,Pontiac; Troy; NW Detroit suburbs
+249,ON ,Sudbury
+250,BC ,Victoria; Kamloops
+251,AL ,Mobile
+252,NC ,Greenville; Rocky Mount; Cape Hatteras
+253,WA ,Tacoma; southern Seattle area
+254,TX ,Waco
+256,AL ,Huntsville
+260,IN ,Ft. Wayne
+262,WI ,Racine; Waukesha; West Bend
+264,— ,Anguilla (Caribbean)
+267,PA ,Philadelphia
+268,— ,Antigua & Barbuda
+269,MI ,Kalamazoo; southwestern
+270,KY ,Bowling Green; Hopkinsville
+272,PA ,Scranton; Wilkes-Barre
+274,WI ,Green Bay
+276,VA ,Bristol; southwestern
+278,— ,withdrawn
+281,TX ,Houston and suburbs
+283,— ,withdrawn
+284,— ,British Virgin Islands (Caribbean)
+289,ON ,Hamilton; Toronto suburbs
+301,MD ,Frederick; Washington DC suburbs
+302,DE ,entire state
+303,CO ,Denver
+304,WV ,entire state
+305,FL ,Miami; Key West
+306,SK ,entire province
+307,WY ,entire state
+308,NE ,North Platte; Grand Island; western
+309,IL ,Bloomington; Peoria; Moline/Quad Cities
+310,CA ,Los Angeles area: Santa Monica; Torrance
+312,IL ,Chicago/downtown only
+313,MI ,Detroit
+314,MO ,St. Louis
+315,NY ,Syracuse; Utica; north central
+316,KS ,Wichita
+317,IN ,Indianapolis
+318,LA ,Shreveport; Alexandria; northern
+319,IA ,Cedar Rapids; Waterloo; Burlington
+320,MN ,St. Cloud; central and west central
+321,FL ,Melbourne; Orlando
+323,CA ,Los Angeles/outer downtown
+325,TX ,Abilene; San Angelo
+327,AR ,Jonesboro; Pine Bluff; most of the state
+330,OH ,Akron; Canton; Youngstown
+331,IL ,Hinsdale; some W. suburbs of Chicago
+334,AL ,Montgomery; southeastern
+336,NC ,Greensboro; High Point; Winston-Salem
+337,LA ,Lafayette; Lake Charles; southwestern
+339,MA ,Lexington; Boston suburbs
+340,VI ,U.S. Virgin Islands
+341,— ,withdrawn
+343,ON ,Ottawa; eastern
+345,— ,Cayman Islands (Caribbean)
+346,TX ,Houston and suburbs
+347,NY ,NYC: Bronx; Brooklyn; Queens; Staten Island
+351,MA ,Lowell; Leominster; northeastern
+352,FL ,Gainesville; Ocala
+356,— ,withdrawn
+360,WA ,Bellingham; Olympia; Vancouver
+361,TX ,Corpus Christi
+364,KY ,Bowling Green; Hopkinsville
+365,ON ,Hamilton; Toronto suburbs
+369,— ,withdrawn
+380,— ,withdrawn
+385,UT ,Salt Lake City; Ogden; Provo
+386,FL ,Daytona Beach; Lake City
+401,RI ,entire state
+402,NE ,Omaha; Lincoln; eastern
+403,AB ,Calgary; southern third of province
+404,GA ,Atlanta
+405,OK ,Oklahoma City; central
+406,MT ,entire state
+407,FL ,Orlando
+408,CA ,San José; Silicon Valley
+409,TX ,Galveston; Beaumont
+410,MD ,Baltimore; northern and eastern
+412,PA ,Pittsburgh
+413,MA ,Springfield; western
+414,WI ,Milwaukee
+415,CA ,San Francisco; Marin County
+416,ON ,Toronto
+417,MO ,Springfield; Joplin; southwestern
+418,QC ,Québec; Gaspé; southeast/sud‑est
+419,OH ,Toledo; northwestern
+423,TN ,Chattanooga; Johnson City
+424,CA ,Los Angeles area: Santa Monica; Torrance
+425,WA ,Everett; Redmond; northern/eastern Seattle area
+430,TX ,Tyler; Texarkana; northeastern
+431,MB ,entire province
+432,TX ,Midland; Odessa; Big Bend
+434,VA ,Charlottesville; Lynchburg; Emporia
+435,UT ,Logan; most of the state
+437,ON ,city of Toronto
+438,QC ,Montréal; Île-Perrot
+440,OH ,Lorain; Ashtabula
+441,— ,Bermuda
+442,CA ,Escondido; Palm Springs; Death Valley
+443,MD ,Baltimore; northern and eastern
+445,— ,withdrawn
+447,IL ,Champaign; Springfield
+450,QC ,Laval; Longueuil; suburbs/banlieues of Montréal
+458,OR ,Eugene; most of the state
+464,— ,withdrawn
+469,TX ,Dallas and suburbs
+470,GA ,Atlanta and suburbs
+473,— ,Grenada (Caribbean)
+475,CT ,New Haven; Bridgeport; NYC suburbs
+478,GA ,Macon; central
+479,AR ,Ft. Smith; Fayetteville; northwestern
+480,AZ ,Scottsdale; east Phoenix area
+484,PA ,Allentown; outer Philadelphia suburbs
+500,— ,Personal Communications Services (premium charges may apply)
+501,AR ,Little Rock; central
+502,KY ,Louisville; Frankfort
+503,OR ,Portland; Salem; Astoria; Tillamook
+504,LA ,New Orleans
+505,NM ,Albuquerque; Santa Fe; northwest
+506,NB ,entire province
+507,MN ,Rochester; southern
+508,MA ,Worcester; Cape Cod; southeastern
+509,WA ,Spokane; eastern
+510,CA ,Oakland
+512,TX ,Austin
+513,OH ,Cincinnati
+514,QC ,Montréal; Île-Perrot
+515,IA ,Des Moines; Ames; Ft. Dodge
+516,NY ,Nassau County (western Long Island)
+517,MI ,Lansing
+518,NY ,Albany; northeastern
+519,ON ,London; Windsor; southern
+520,AZ ,Tucson; southeastern
+530,CA ,Redding; Lake Tahoe; northeastern
+531,NE ,Omaha; Lincoln; eastern
+534,WI ,Eau Claire; northern; northwestern
+539,OK ,Tulsa; northeastern
+540,VA ,Harrisonburg; Roanoke; western
+541,OR ,Eugene; most of the state
+548,ON ,London; Windsor; southern
+551,NJ ,Hackensack; Jersey City
+557,— ,withdrawn
+559,CA ,Fresno
+561,FL ,Palm Beach County
+562,CA ,Los Angeles area: Long Beach
+563,IA ,Davenport/Quad Cities; Dubuque; Decorah
+564,— ,withdrawn
+567,OH ,Toledo; northwest
+570,PA ,Scranton; Wilkes-Barre
+571,VA ,Arlington; suburbs of Washington D.C.
+573,MO ,Columbia; Jefferson City; central and eastern
+574,IN ,South Bend
+575,NM ,Las Cruces; Taos; most of the state
+579,QC ,Laval; Longueuil; suburbs/banlieues of Montréal
+580,OK ,Lawton; Enid; Ada
+581,QC ,Québec; Gaspé; southeastern
+582,PA ,new code to be added to 814 area (Erie; Altoona) circa 2014
+585,NY ,Rochester
+586,MI ,Warren; Macomb County
+587,AB ,entire province
+600,— ,Canada: special purposes (e.g.; caller-pays cellular) / Services non-géographiques canadiens
+601,MS ,Jackson; Hattiesburg; central
+602,AZ ,Phoenix
+603,NH ,entire state
+604,BC ,Vancouver
+605,SD ,entire state
+606,KY ,Ashland; rural E. KY
+607,NY ,Binghamton; south central
+608,WI ,Madison; southwestern
+609,NJ ,Atlantic City; Trenton
+610,PA ,Allentown; outer Philadelphia suburbs
+612,MN ,Minneapolis
+613,ON ,Ottawa; eastern
+614,OH ,Columbus
+615,TN ,Nashville
+616,MI ,Grand Rapids
+617,MA ,Boston
+618,IL ,East St. Louis; southern
+619,CA ,San Diego; Coronado
+620,KS ,southern Kansas
+623,AZ ,Glendale; west Phoenix area
+626,CA ,Los Angeles area: Pasadena; San Gabriel Valley
+627,— ,withdrawn
+628,CA ,San Francisco; Marin County
+629,TN ,Nashville; central and north central
+630,IL ,Hinsdale; some western suburbs of Chicago
+631,NY ,Suffolk County
+636,MO ,St. Charles
+639,SK ,entire province
+641,IA ,Mason City; Marshalltown
+646,NY ,New York City: Manhattan
+647,ON ,Toronto
+649,— ,Turks & Caicos Islands (Caribbean)
+650,CA ,San Mateo; peninsula; San Francisco Airport [SFO]
+651,MN ,St. Paul; eastern Twin Cities area
+657,CA ,Anaheim; northern Orange County
+659,— ,withdrawn
+660,MO ,Sedalia; north central
+661,CA ,Bakersfield; northern Los Angeles County
+662,MS ,northern half; Greenville; Tupelo
+664,— ,Montserrat (Caribbean)
+667,MD ,Baltimore; northern and eastern
+669,CA ,San José; Silicon Valley
+670,MP ,CNMI / Mariana Islands / U.S. Pacific; (Saipan)
+671,GU ,Guam/U.S. Pacific
+678,GA ,Atlanta and suburbs
+679,— ,withdrawn
+681,WV ,entire state
+682,TX ,Fort Worth
+684,AS ,American Samoa (entire territory)
+689,— ,withdrawn
+700,— ,Special purposes: dependent on long-distance carrier used (premium charges may apply)
+701,ND ,entire state
+702,NV ,Las Vegas; Clark County
+703,VA ,Arlington; suburbs of Washington DC
+704,NC ,Charlotte
+705,ON ,Sudbury; north central
+706,GA ,Athens; Columbus; Augusta; Rome
+707,CA ,north coast and wine country: Santa Rosa; Napa; Vallejo
+708,IL ,La Grange; some southern/western suburbs of Chicago
+709,NL ,Newfoundland & Labrador; entire province
+710,US ,U.S. Federal Government; authorized users only
+712,IA ,Sioux City; Council Bluffs; western
+713,TX ,Houston and suburbs
+714,CA ,Anaheim; northern Orange Co.
+715,WI ,Eau Claire; northern/northwestern
+716,NY ,Buffalo; western tip
+717,PA ,Harrisburg
+718,NY ,NYC: Bronx; Brooklyn; Queens; Staten Island
+719,CO ,Colorado Springs; southeastern
+720,CO ,Denver
+721,— ,Sint Maarten (Dutch Caribbean)
+724,PA ,New Castle; western
+725,NV ,Las Vegas
+727,FL ,St. Petersburg
+730,IL ,East St. Louis; southern
+731,TN ,Jackson; western TN
+732,NJ ,New Brunswick; northern Jersey Shore region
+734,MI ,Ann Arbor; Monroe; S. Detroit suburbs & Metro Airport [DTW]
+737,TX ,Austin
+740,OH ,Marion; Zanesville; southeastern
+747,CA ,Los Angeles area: San Fernando
+752,— ,withdrawn
+754,FL ,Ft. Lauderdale; Broward County
+757,VA ,Norfolk
+758,— ,St. Lucia (Caribbean)
+760,CA ,Escondido; Palm Springs; Death Valley
+762,GA ,Athens; Columbus; Augusta; Rome
+763,MN ,northwest suburbs of Minneapolis
+764,— ,withdrawn
+765,IN ,Lafayette; Muncie
+767,— ,Dominica (Caribbean)
+769,MS ,Jackson; Hattiesburg; central
+770,GA ,Atlanta suburbs
+772,FL ,Ft. Pierce; central east coast of Florida
+773,IL ,Chicago/uptown
+774,MA ,Worcester; Cape Cod; southeastern
+775,NV ,Reno; most of Nevada
+778,BC ,entire province
+779,IL ,Rockford; Joliet; northern
+780,AB ,Edmonton; northern
+781,MA ,Lexington; suburbs of Boston
+782,NS,
+784,— ,St. Vincent & the Grenadines (Caribbean)
+785,KS ,Topeka; north central; northwestern
+786,FL ,Miami; Key West
+787,PR ,Puerto Rico
+800,— ,Toll-free services
+801,UT ,Salt Lake City; Provo; Ogden
+802,VT ,entire state
+803,SC ,Columbia; central
+804,VA ,Richmond; Petersburg
+805,CA ,San Luis Obispo; Oxnard
+806,TX ,Amarillo; Lubbock; panhandle
+807,ON ,Thunder Bay; northwestern
+808,HI ,entire state
+809,— ,Dominican Republic (Caribbean)
+810,MI ,Flint; Port Huron; NE Detroit suburbs
+812,IN ,Evansville; southern
+813,FL ,Tampa
+814,PA ,Altoona; Erie
+815,IL ,Rockford; Joliet; northern
+816,MO ,Kansas City; St. Joseph
+817,TX ,Ft. Worth
+818,CA ,Los Angeles area: San Fernando
+819,QC ,Sherbrooke; Hull; Trois-Rivières; Kuujjuaq; central; western; and northern / centre; ouest; et nord
+822,— ,future toll-free services
+825,AB ,Alberta; Canada
+828,NC ,Asheville; western tip
+829,— ,Dominican Republic
+830,TX ,Del Rio; New Braunfels
+831,CA ,Monterey; Santa Cruz
+832,TX ,Houston and suburbs
+833,— ,future toll-free services
+835,— ,withdrawn
+843,SC ,Charleston; coastal
+844,— ,toll-free services
+845,NY ,Poughkeepsie; N. suburbs of NYC
+847,IL ,Skokie; northern suburbs of Chicago
+848,NJ ,New Brunswick; northern Jersey Shore region
+849,— ,Dominican Republic
+850,FL ,Tallahassee; Pensacola; panhandle
+855,— ,toll-free services
+856,NJ ,Camden; Vineland; southwestern
+857,MA ,Boston
+858,CA ,La Jolla; near north suburbs of San Diego
+859,KY ,Lexington; Covington
+860,CT ,Hartford; northern and eastern
+862,NJ ,Newark; Paterson
+863,FL ,Lakeland; Okeechobee
+864,SC ,Greenville; Spartanburg; northwestern
+865,TN ,Knoxville
+866,— ,Toll-free services
+867,— ,Yukon; Northwest Terr.; Nunavut
+868,— ,Trinidad & Tobago (Caribbean)
+869,— ,St. Kitts & Nevis (Caribbean)
+870,AR ,Jonesboro; Pine Bluff; most of the state
+872,IL ,Chicago
+873,QC ,Sherbrooke; Hull; Trois-Rivières; Kuujjuaq; central; western; and northern / centre; ouest; et nord
+876,— ,Jamaica (Caribbean)
+877,— ,Toll-free services
+878,PA ,Pittsburgh; New Castle
+880,— ,withdrawn
+881,— ,withdrawn
+882,— ,withdrawn
+888,— ,Toll-free services
+900,— ,Premium pay-per-call services
+901,TN ,Memphis
+902,NS,
+903,TX ,Tyler; Texarkana; northeastern
+904,FL ,Jacksonville
+905,ON ,Hamilton; Toronto suburbs
+906,MI ,Sault Ste. Marie; upper peninsula
+907,AK ,entire state
+908,NJ ,Elizabeth
+909,CA ,San Bernardino; Ontario
+910,NC ,Wilmington; Fayetteville; southeastern
+912,GA ,Savannah; southeastern
+913,KS ,Kansas City; Leavenworth
+914,NY ,White Plains; Westchester County
+915,TX ,El Paso; western tip
+916,CA ,Sacramento
+917,NY ,New York City: overlays all 5 boroughs
+918,OK ,Tulsa; northeastern
+919,NC ,Raleigh
+920,WI ,Green Bay; northeastern
+925,CA ,Concord; Walnut Creek; Livermore; inland East Bay
+928,AZ ,Flagstaff; Yuma; most of the state
+929,NY ,NYC: Bronx; Brooklyn; Queens; and Staten Island
+930,IN ,Evansville; southern Indiana
+931,TN ,Clarksville; central
+935,— ,withdrawn
+936,TX ,Huntsville; Nacogdoches
+937,OH ,Dayton
+938,AL ,Huntsville; northern
+939,PR ,Puerto Rico
+940,TX ,Wichita Falls; Denton
+941,FL ,Sarasota
+947,MI ,Pontiac; Troy; NW Detroit suburbs
+949,CA ,Irvine; Newport Beach; southern Orange County
+951,CA ,Riverside
+952,MN ,Bloomington; SW suburbs of Minneapolis
+954,FL ,Ft. Lauderdale; Broward County
+956,TX ,Brownsville; Laredo; Rio Grande Valley
+959,CT ,Hartford; northern and eastern
+970,CO ,Grand Junction; northern and western
+971,OR ,Portland; Salem; Tillamook; Astoria
+972,TX ,Dallas and suburbs
+973,NJ ,Newark; Paterson
+975,— ,withdrawn
+978,MA ,Lowell; Leominster; northeastern
+979,TX ,Bryan/College Station; Wharton
+980,NC ,Charlotte
+984,NC ,Raleigh
+985,LA ,Hammond; Houma
+989,MI ,Saginaw

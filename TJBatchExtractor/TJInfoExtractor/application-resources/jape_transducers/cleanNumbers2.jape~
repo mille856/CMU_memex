@@ -1,0 +1,108 @@
+Imports: {
+  import java.math.BigInteger;  
+}
+
+Phase:numbercleanzeros2
+Input: Token Integer SpaceToken Lookup
+Options: control = all
+
+Rule: DecimalClean
+(({ Integer.type == numbers }):num {Token.string == "."} {Integer.value == "0"}):completeNum
+-->
+{
+   AnnotationSet numSet = (AnnotationSet)bindings.get("num");
+   FeatureMap features = Factory.newFeatureMap(); 
+   features.put("value", numSet.iterator().next().getFeatures().get("value") );
+   features.put("rule", "DecimalClean");
+   features.put("type", "Numbers");
+
+   AnnotationSet completeSet = ((AnnotationSet)bindings.get("completeNum")).get("Integer");
+   long start = completeSet.firstNode().getOffset();
+   long end = completeSet.lastNode().getOffset();
+   inputAS.removeAll(completeSet);
+
+   try {  
+      outputAS.add(start,end, "Integer", features);
+   } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+   }
+}
+
+Rule: Lclean
+({Integer.value == "1"}):num
+({!Token.string==".", !Token.string=="/"})
+-->
+{
+   AnnotationSet Set = (AnnotationSet) bindings.get("num");   
+   Long start = Set.firstNode().getOffset();
+   Long end = Set.lastNode().getOffset();        
+   
+   try{
+   if( doc.getContent().getContent(start,end).toString().toLowerCase().equals("l") ){
+     AnnotationSet toremove = inputAS.get(start,end).get("Integer");
+     inputAS.removeAll(toremove);   
+   }
+   } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+  }
+}
+
+Rule: FractionClean1
+( 
+   ({ Integer.value == "1" } | { Integer.value == "0" }):num1
+   ({Token.string == "."})
+   ({ Integer.value == "5" }):num2
+): completenum
+-->
+{
+  AnnotationSet completeSet = (AnnotationSet)bindings.get("completenum").get("Integer");
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num1").get("Integer");
+  AnnotationSet numSet2 = (AnnotationSet)bindings.get("num2").get("Integer");
+  Annotation numAnn = (numSet == null || numSet.isEmpty()) ? null : numSet.iterator().next();
+  double num_val = (numAnn==null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "FractionClean1");
+  features.put("value", num_val + 0.5 );
+  features.put("type", (numAnn == null) ? "none" : numAnn.getFeatures().get("type") );
+
+  try {  
+      outputAS.add(completeSet.firstNode().getOffset(), completeSet.lastNode().getOffset(), "Number", features);
+  } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+  }
+
+  inputAS.remove(numAnn);
+  inputAS.remove(numSet2.iterator().next());
+}
+
+
+Rule: FractionClean2
+( 
+   ({ Integer.value == "1" }):num1
+   ({Token.string == "/"})
+   ({ Integer.value == "2" } | { Integer.value == "4" }):num2
+): completenum
+-->
+{
+  AnnotationSet completeSet = (AnnotationSet)bindings.get("completenum").get("Integer");
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num1").get("Integer");
+  AnnotationSet numSet2 = (AnnotationSet)bindings.get("num2").get("Integer");
+  Annotation numAnn = (numSet2 == null || numSet2.isEmpty()) ? null : numSet2.iterator().next();
+  double num_val = (numAnn == null) ? 1.0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "FractionClean2");
+  features.put("value", 1.0/num_val );
+  features.put("type", (numAnn == null) ? "none" : numAnn.getFeatures().get("type") );
+
+  try {  
+      outputAS.add(completeSet.firstNode().getOffset(), completeSet.lastNode().getOffset(), "Number", features);
+  } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+  }
+
+  inputAS.remove(numAnn);
+  inputAS.remove(numSet.iterator().next());
+}
+

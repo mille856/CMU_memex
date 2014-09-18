@@ -1,0 +1,4 @@
+<CREOLE-DIRECTORY>
+  <JAR SCAN="true">jape-plus.jar</JAR>
+  <JAR>lib/colt-1.2.0-free.jar</JAR>
+</CREOLE-DIRECTORY>

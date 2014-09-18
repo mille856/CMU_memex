@@ -1,0 +1,6 @@
+This plugin tries to identify phone number is messy text.
+
+To build
+1. Place in GATE plugins directory
+2. $ ant clean jar
+

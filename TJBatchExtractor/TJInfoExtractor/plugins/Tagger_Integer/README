@@ -1,0 +1,6 @@
+This plugin reads positive integer numbers in words & digits (& unicode symbols) and parses out their numerical value.
+
+To build
+1. Place in GATE plugins directory
+2. $ ant clean jar
+

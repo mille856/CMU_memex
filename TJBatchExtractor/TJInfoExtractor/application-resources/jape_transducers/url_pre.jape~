@@ -1,0 +1,20 @@
+Phase:	UrlPre
+Input:  Token SpaceToken DotCom
+Options: control = appelt
+
+Rule: Urlpre
+
+(	(({Token.string ==~ "(?i)http[s]?"}	|
+	  {Token.string ==~ "(?i)[s]?ftp"})
+	 {Token.string == ":"}
+	 {Token.string == "/"}
+         {Token.string == "/"}
+        )	|
+	({Token.string ==~ "(?i)www"}
+         ({Token.string == "."} | {DotCom.kind == dot})
+        )
+):urlpre
+-->
+:urlpre.UrlPre = {rule = "UrlPre"}
+
+

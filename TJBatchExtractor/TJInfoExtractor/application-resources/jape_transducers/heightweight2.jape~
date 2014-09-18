@@ -1,0 +1,65 @@
+Imports: {
+  import java.math.BigInteger;  
+}
+
+Phase:heightweight2
+Input: Token Integer Lookup height weight
+Options: control = appelt
+
+Rule: WeightRule1
+Priority: 100
+({ height})
+({Token.kind != word})[0,2]
+({ Integer.value>=50, Integer.value<=350, !Integer within weight}):num
+--> 
+{
+  AnnotationSet wtSet = (AnnotationSet)bindings.get("num");
+  Annotation wtAnn = (wtSet == null || wtSet.isEmpty()) ? null : wtSet.iterator().next();
+  double wt_val = (wtAnn == null) ? 0 : ((BigInteger) wtAnn.getFeatures().get("value")).doubleValue();
+    
+    AnnotationSet tmSet = bindings.get("num");  
+    Long start = tmSet.firstNode().getOffset();
+    Long end = tmSet.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "WeightRule1");
+    features.put("pounds", wt_val);
+    try {
+      outputAS.add(start, end, "weight", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+Rule: HeightRule2
+Priority: 100
+(
+  ({ Integer.value>=4, Integer.value<=7, !Integer within height }):ft
+  ({ Token.kind != word }
+  ({ Integer.value<=11, !Integer within height }):in )?
+  ({ Token.kind != word })?
+):num
+( {weight} )
+--> 
+{
+  AnnotationSet ftSet = (AnnotationSet)bindings.get("ft");
+  Annotation ftAnn = (ftSet == null || ftSet.isEmpty()) ? null : ftSet.iterator().next();
+  double ft_val = (ftAnn == null) ? 100 : ((BigInteger) ftAnn.getFeatures().get("value")).doubleValue();
+
+  AnnotationSet inSet = (AnnotationSet)bindings.get("in");
+  Annotation inAnn = (inSet == null || inSet.isEmpty()) ? null : inSet.iterator().next();
+  double in_val = (inAnn == null) ? 0 : ((BigInteger) inAnn.getFeatures().get("value")).doubleValue();
+    
+    AnnotationSet tmSet = bindings.get("num");  
+    Long start = tmSet.firstNode().getOffset();
+    Long end = tmSet.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "HeightRule0b");
+    features.put("feet", ft_val);
+    features.put("inches", (inAnn==null) ? "none" : in_val);
+    try {
+      outputAS.add(start, end, "height", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+

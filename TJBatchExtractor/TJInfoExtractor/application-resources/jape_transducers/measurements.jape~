@@ -1,0 +1,344 @@
+Imports: {
+  import java.math.BigInteger;  
+}
+
+Phase:measurements
+Input: Token Integer measurement Lookup
+Options: control = all
+
+Rule: MeasureRule0
+(
+  ({ Integer.value>=20, Integer.value<=72 }):chest
+  ({Token.kind==punctuation})[0,4]
+  (( ({ Lookup.majorType == measuredescriptor, Lookup.minorType == cupprefix})?
+    { Lookup.majorType == measuredescriptor, Lookup.minorType == cupsize }):cup)?
+  ({ Lookup.majorType == measuredescriptor, Lookup.minorType == cupsuffix })?
+  ({Token.kind==punctuation})[0,4]
+  ({ Integer.value>=20, Integer.value<=72 }):waist
+  ({Token.kind==punctuation})[0,4]
+  ({ Integer.value>=20, Integer.value<=72 }):hips
+):measurement
+--> 
+{
+  AnnotationSet Set;
+  Annotation annot;
+
+  Set = (AnnotationSet)bindings.get("chest");
+  annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double chest_val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+
+  Set = (AnnotationSet)bindings.get("waist");
+  annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double waist_val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+
+  Set = (AnnotationSet)bindings.get("hips");
+  annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double hip_val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+  if(chest_val>waist_val && waist_val<hip_val){
+    Set = bindings.get("measurement");  
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+
+     AnnotationSet toremove = inputAS.get(start,end).get("PhoneNumber");
+     if( toremove!=null) inputAS.removeAll(toremove);
+
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "MeasureRule0");
+    features.put("chest", chest_val);
+    features.put("waist", waist_val);
+    features.put("hip", hip_val);
+    try {
+      Set = (AnnotationSet)bindings.get("cup");
+      features.put("cup", (Set==null || Set.isEmpty()) ? "none" : doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toUpperCase());
+      outputAS.add(start, end, "measurement", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+   }
+}
+
+Rule: MeasureRule0R
+(
+  ({ Integer.value>=20, Integer.value<=72 }):hips
+  ({Token.kind==punctuation})[0,4]
+  ({ Integer.value>=20, Integer.value<=72 }):waist
+  ({Token.kind==punctuation})[0,4]
+  ({ Integer.value>=20, Integer.value<=72 }):chest
+  ({Token.kind==punctuation})[0,4]
+  (({ Lookup.majorType == measuredescriptor, Lookup.minorType == cupprefix})? 
+    { Lookup.majorType == measuredescriptor, Lookup.minorType == cupsize }):cup
+  ({ Lookup.majorType == measuredescriptor, Lookup.minorType == cupsuffix })?
+):measurement
+--> 
+{
+  AnnotationSet Set;
+  Annotation annot;
+  Set = (AnnotationSet)bindings.get("chest");
+  annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double chest_val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+
+  Set = (AnnotationSet)bindings.get("waist");
+  annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double waist_val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+
+  Set = (AnnotationSet)bindings.get("hips");
+  annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double hip_val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+  if(chest_val>waist_val && waist_val<hip_val){  
+    Set = bindings.get("measurement");  
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+
+     AnnotationSet toremove = inputAS.get(start,end).get("PhoneNumber");
+     if( toremove!=null) inputAS.removeAll(toremove);
+
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "MeasureRule0R");
+    features.put("chest", chest_val);
+    features.put("waist", waist_val);
+    features.put("hip", hip_val);
+    try {
+      Set = (AnnotationSet)bindings.get("cup");
+      features.put("cup", (Set==null || Set.isEmpty()) ? "none" : doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toUpperCase());
+      outputAS.add(start, end, "measurement", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+  }
+}
+
+Rule: MeasureRule1
+(
+  ({ Integer.value>=20, Integer.value<=72, !Integer within measurement}):chest
+  ({Token.kind==punctuation, Token.string != "."})[0,2]
+  (({ Lookup.majorType == measuredescriptor, Lookup.minorType == cupprefix})?
+    { Lookup.majorType == measuredescriptor, Lookup.minorType == cupsize, !Lookup within measurement }):cup
+  ({ Lookup.majorType == measuredescriptor, Lookup.minorType == cupsuffix})?
+):measurement
+--> 
+{
+  AnnotationSet Set;
+  Annotation annot;
+  Set = (AnnotationSet)bindings.get("chest");
+  annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double chest_val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+    
+    Set = bindings.get("measurement");  
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "MeasureRule1");
+    features.put("chest", chest_val);
+    features.put("waist", "none");
+    features.put("hip", "none");
+    try {
+      Set = (AnnotationSet)bindings.get("cup");
+      features.put("cup", doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toUpperCase());
+      outputAS.add(start, end, "measurement", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+Rule: MeasureRule2
+(
+  (({ Lookup.majorType == measuredescriptor, Lookup.minorType == cupprefix, !Lookup within measurement}
+   ({ Token.kind == punctuation})? )?  
+  { Lookup.majorType == measuredescriptor, Lookup.minorType == cupsize, !Lookup within measurement }):cup
+  ({ Lookup.majorType == measuredescriptor, Lookup.minorType == cupsuffix, !Lookup within measurement})
+):measurement
+--> 
+{
+  AnnotationSet Set;
+  Annotation annot;
+    Set = bindings.get("measurement");  
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "MeasureRule2");
+    features.put("chest", "none");
+    features.put("waist", "none");
+    features.put("hip", "none");
+    try {
+      Set = (AnnotationSet)bindings.get("cup");
+      features.put("cup", doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toUpperCase());
+      outputAS.add(start, end, "measurement", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+Rule: MeasureRule2b
+(
+  ({ Lookup.majorType == measuredescriptor, Lookup.minorType == cupprefix, !Lookup within measurement}
+   ({ Token.kind == punctuation})?
+  { Lookup.majorType == measuredescriptor, Lookup.minorType == cupsize, !Lookup within measurement }):cup
+  ({ Lookup.majorType == measuredescriptor, Lookup.minorType == cupsuffix, !Lookup within measurement})?
+):measurement
+--> 
+{
+  AnnotationSet Set;
+  Annotation annot;
+    Set = bindings.get("measurement");  
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "MeasureRule2b");
+    features.put("chest", "none");
+    features.put("waist", "none");
+    features.put("hip", "none");
+    try {
+      Set = (AnnotationSet)bindings.get("cup");
+      features.put("cup", doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toUpperCase());
+      outputAS.add(start, end, "measurement", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+
+Rule: MeasureBust_R
+({ Integer.value>=20, Integer.value<=72, !Integer within measurement}):num 
+({Token.kind==punctuation})?
+({ Lookup.majorType == measuredescriptor, Lookup.minorType == bust, !Lookup within measurement })
+--> 
+{
+  AnnotationSet Set = bindings.get("num");  
+  Annotation annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "MeasureBust_R");
+    features.put("chest", val);
+    features.put("waist", "none");
+    features.put("hip", "none");
+    features.put("cup", "none");
+    try {            
+      outputAS.add(start, end, "measurement", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+Rule: MeasureBust_L
+({ Lookup.majorType == measuredescriptor, Lookup.minorType == bust, !Lookup within measurement })
+({Token.kind==punctuation})?
+({ Integer.value>=20, Integer.value<=72, !Integer within measurement}):num 
+--> 
+{
+  AnnotationSet Set = bindings.get("num");  
+  Annotation annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "MeasureBust_L");
+    features.put("chest", val);
+    features.put("waist", "none");
+    features.put("hip", "none");
+    features.put("cup", "none");
+    try {            
+      outputAS.add(start, end, "measurement", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+Rule: MeasureWaist_R
+({ Integer.value>=20, Integer.value<=72, !Integer within measurement }):num 
+({Token.kind==punctuation})?
+({ Lookup.majorType == measuredescriptor, Lookup.minorType == waist, !Lookup within measurement })
+--> 
+{
+  AnnotationSet Set = bindings.get("num");  
+  Annotation annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "MeasureWaist_R");
+    features.put("chest", "none");
+    features.put("waist", val);
+    features.put("hip", "none");
+    features.put("cup", "none");
+    try {            
+      outputAS.add(start, end, "measurement", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+Rule: MeasureWaist_L
+({ Lookup.majorType == measuredescriptor, Lookup.minorType == waist, !Lookup within measurement })
+({Token.kind==punctuation})?
+({ Integer.value>=20, Integer.value<=72, !Integer within measurement}):num 
+({!Lookup.majorType==measuredescriptor})
+--> 
+{
+  AnnotationSet Set = bindings.get("num");  
+  Annotation annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "MeasureWaist_L");
+    features.put("chest", "none");
+    features.put("waist", val);
+    features.put("hip", "none");
+    features.put("cup", "none");
+    try {            
+      outputAS.add(start, end, "measurement", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+Rule: MeasureHip_R
+({ Integer.value>=20, Integer.value<=72, !Integer within measurement }):num 
+({Token.kind==punctuation})?
+({ Lookup.majorType == measuredescriptor, Lookup.minorType == hip, !Lookup within measurement })
+--> 
+{
+  AnnotationSet Set = bindings.get("num");  
+  Annotation annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "MeasureHip_R");
+    features.put("chest", "none");
+    features.put("waist", "none");
+    features.put("hip", val);
+    features.put("cup", "none");
+    try {            
+      outputAS.add(start, end, "measurement", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }  
+}
+
+Rule: MeasureHip_L
+({ Lookup.majorType == measuredescriptor, Lookup.minorType == hip, !Lookup within measurement })
+({Token.kind==punctuation})?
+({ Integer.value>=20, Integer.value<=72, !Integer within measurement }):num 
+({!Lookup.majorType==measuredescriptor})
+--> 
+{
+  AnnotationSet Set = bindings.get("num");  
+  Annotation annot = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+  double val = (annot == null) ? 0 : ((BigInteger) annot.getFeatures().get("value")).doubleValue();
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "MeasureHip_L");
+    features.put("chest", "none");
+    features.put("waist", "none");
+    features.put("hip", val);
+    features.put("cup", "none");
+    try {            
+      outputAS.add(start, end, "measurement", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    } 
+}

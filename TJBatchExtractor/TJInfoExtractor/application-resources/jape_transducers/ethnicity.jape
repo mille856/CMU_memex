@@ -1,0 +1,26 @@
+/*
+   File:        ethnicity.jape
+   Author:      Kyle Miller
+   Created:     July, 2014
+   Description: a GATE JAPE file that attempts to annotate information in text
+
+   Copyright (C) 2014, Carnegie Mellon University
+*/
+/* 
+ * This file is free software,
+ * licenced under the GNU Library General Public License, Version 3, June 2007
+ * (in the distribution as file licence.html)  
+ * 
+ */
+
+Phase:ethnicity
+Input: Token Lookup
+Options: control = all negationGrouping = false
+
+Rule: ethnicity0
+({Token, !Token.string ==~ "(?i)no", !Lookup.minorType == massageservice})[3]
+( { Lookup.majorType == country_adj } ):eth
+({Token, !Token.string ==~ "(?i)americans", !Lookup.majorType==men, !Lookup.minorType == massageservice})
+({Token, !Lookup.majorType==men, !Lookup.minorType == massageservice})[3]
+-->
+:eth.Ethnicity = { rule = ethnicity0, ethnicity = :eth@string }

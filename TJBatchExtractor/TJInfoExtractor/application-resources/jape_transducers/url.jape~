@@ -1,0 +1,93 @@
+Phase:	Url
+Input:  Lookup SpaceToken Token UrlPre DotCom Email
+Options: control = appelt
+
+Rule: Url1
+Priority: 50
+
+(	
+ {UrlPre}
+ ({Token})*
+):urlAddress 
+({SpaceToken})
+-->
+{
+  AnnotationSet Set = bindings.get("urlAddress");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "Url1");  
+  try {
+      features.put("url", doc.getContent().getContent(start,end).toString().toLowerCase());
+      outputAS.add(start, end, "Url", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+/*Rule: UrlContext
+Priority: 20
+
+(
+ {Token.string == "at"}
+ {Token.string == ":"}
+)
+(
+ ({Token.orth == lowercase}	|
+        {Token.orth == upperInitial}	|
+        {Token.kind == number}		|
+        {Token.kind == punctuation}	|
+        {Token.kind == symbol}		|
+	({Token.string == "."} | {DotCom.kind==dot}))+ 
+	
+        ({Token.string == "."} | {DotCom.kind==dot})
+	
+  	({Token.orth == lowercase}	|
+        {Token.orth == upperInitial}	|
+        {Token.kind == number}		|
+        {Token.kind == punctuation}	|
+        {Token.kind == symbol}		|
+	{Token.string == "/"}		|
+        ({Token.string == "."} | {DotCom.kind==dot}))*
+)
+:urlAddress 
+-->
+{
+  AnnotationSet Set = bindings.get("urlAddress");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "UrlContext");  
+  try {
+      features.put("url", doc.getContent().getContent(start,end).toString().toLowerCase());
+      outputAS.add(start, end, "Url", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+*/
+
+
+
+Rule: Url2
+(	
+ ({UrlPre} ({SpaceToken})*)? 
+ ({Token.string !=~ "[\\[\\]]", !DotCom, !UrlPre} ({DotCom.kind==dot})?)[1,10]
+ ({SpaceToken})*
+ ({DotCom.kind==com, !DotCom within Email})
+):urlAddress 
+-->
+{
+  AnnotationSet Set = bindings.get("urlAddress");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "Url2");  
+  try {
+      features.put("url", doc.getContent().getContent(start,end).toString().toLowerCase());
+      outputAS.add(start, end, "Url", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+

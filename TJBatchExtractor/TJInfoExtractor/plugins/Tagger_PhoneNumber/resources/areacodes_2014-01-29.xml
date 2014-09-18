@@ -1,0 +1,413 @@
+<config>
+<description>Valid area codes as of 2014-01-29</description>
+<area_codes>
+<code ac="201" state="NJ">Hackensack; Jersey City</code>
+<code ac="202" state="DC">Washington DC</code>
+<code ac="203" state="CT">New Haven; Bridgeport; NYC suburbs</code>
+<code ac="204" state="MB">entire province</code>
+<code ac="205" state="AL">Birmingham; Tuscaloosa</code>
+<code ac="206" state="WA">Seattle</code>
+<code ac="207" state="ME">entire state</code>
+<code ac="208" state="ID">entire state</code>
+<code ac="209" state="CA">Modesto; Stockton</code>
+<code ac="210" state="TX">San Antonio</code>
+<code ac="212" state="NY">New York City: Manhattan</code>
+<code ac="213" state="CA">Los Angeles/inner downtown</code>
+<code ac="214" state="TX">Dallas and suburbs</code>
+<code ac="215" state="PA">Philadelphia</code>
+<code ac="216" state="OH">Cleveland</code>
+<code ac="217" state="IL">Champaign; Springfield</code>
+<code ac="218" state="MN">Duluth; northern</code>
+<code ac="219" state="IN">Gary; northwestern</code>
+<code ac="224" state="IL">north suburbs of Chicago</code>
+<code ac="225" state="LA">Baton Rouge</code>
+<code ac="226" state="ON">London; Windsor; southern</code>
+<code ac="227" state="—">withdrawn</code>
+<code ac="228" state="MS">Biloxi; Gulfport; extreme southern tip</code>
+<code ac="229" state="GA">Albany; Valdosta; southwestern</code>
+<code ac="231" state="MI">Muskegon; Traverse City</code>
+<code ac="234" state="OH">Akron; Canton; Youngstown</code>
+<code ac="236" state="BC">entire province</code>
+<code ac="239" state="FL">Ft. Myers; Naples</code>
+<code ac="240" state="MD">Frederick; Washington DC suburbs</code>
+<code ac="242" state="—">Bahamas (Atlantic Ocean)</code>
+<code ac="246" state="—">Barbados (Caribbean)</code>
+<code ac="248" state="MI">Pontiac; Troy; NW Detroit suburbs</code>
+<code ac="249" state="ON">Sudbury</code>
+<code ac="250" state="BC">Victoria; Kamloops</code>
+<code ac="251" state="AL">Mobile</code>
+<code ac="252" state="NC">Greenville; Rocky Mount; Cape Hatteras</code>
+<code ac="253" state="WA">Tacoma; southern Seattle area</code>
+<code ac="254" state="TX">Waco</code>
+<code ac="256" state="AL">Huntsville</code>
+<code ac="260" state="IN">Ft. Wayne</code>
+<code ac="262" state="WI">Racine; Waukesha; West Bend</code>
+<code ac="264" state="—">Anguilla (Caribbean)</code>
+<code ac="267" state="PA">Philadelphia</code>
+<code ac="268" state="—">Antigua and Barbuda</code>
+<code ac="269" state="MI">Kalamazoo; southwestern</code>
+<code ac="270" state="KY">Bowling Green; Hopkinsville</code>
+<code ac="272" state="PA">Scranton; Wilkes-Barre</code>
+<code ac="274" state="WI">Green Bay</code>
+<code ac="276" state="VA">Bristol; southwestern</code>
+<code ac="278" state="—">withdrawn</code>
+<code ac="281" state="TX">Houston and suburbs</code>
+<code ac="283" state="—">withdrawn</code>
+<code ac="284" state="—">British Virgin Islands (Caribbean)</code>
+<code ac="289" state="ON">Hamilton; Toronto suburbs</code>
+<code ac="301" state="MD">Frederick; Washington DC suburbs</code>
+<code ac="302" state="DE">entire state</code>
+<code ac="303" state="CO">Denver</code>
+<code ac="304" state="WV">entire state</code>
+<code ac="305" state="FL">Miami; Key West</code>
+<code ac="306" state="SK">entire province</code>
+<code ac="307" state="WY">entire state</code>
+<code ac="308" state="NE">North Platte; Grand Island; western</code>
+<code ac="309" state="IL">Bloomington; Peoria; Moline/Quad Cities</code>
+<code ac="310" state="CA">Los Angeles area: Santa Monica; Torrance</code>
+<code ac="312" state="IL">Chicago/downtown only</code>
+<code ac="313" state="MI">Detroit</code>
+<code ac="314" state="MO">St. Louis</code>
+<code ac="315" state="NY">Syracuse; Utica; north central</code>
+<code ac="316" state="KS">Wichita</code>
+<code ac="317" state="IN">Indianapolis</code>
+<code ac="318" state="LA">Shreveport; Alexandria; northern</code>
+<code ac="319" state="IA">Cedar Rapids; Waterloo; Burlington</code>
+<code ac="320" state="MN">St. Cloud; central and west central</code>
+<code ac="321" state="FL">Melbourne; Orlando</code>
+<code ac="323" state="CA">Los Angeles/outer downtown</code>
+<code ac="325" state="TX">Abilene; San Angelo</code>
+<code ac="327" state="AR">Jonesboro; Pine Bluff; most of the state</code>
+<code ac="330" state="OH">Akron; Canton; Youngstown</code>
+<code ac="331" state="IL">Hinsdale; some W. suburbs of Chicago</code>
+<code ac="334" state="AL">Montgomery; southeastern</code>
+<code ac="336" state="NC">Greensboro; High Point; Winston-Salem</code>
+<code ac="337" state="LA">Lafayette; Lake Charles; southwestern</code>
+<code ac="339" state="MA">Lexington; Boston suburbs</code>
+<code ac="340" state="VI">U.S. Virgin Islands</code>
+<code ac="341" state="—">withdrawn</code>
+<code ac="343" state="ON">Ottawa; eastern</code>
+<code ac="345" state="—">Cayman Islands (Caribbean)</code>
+<code ac="346" state="TX">Houston and suburbs</code>
+<code ac="347" state="NY">NYC: Bronx; Brooklyn; Queens; Staten Island</code>
+<code ac="351" state="MA">Lowell; Leominster; northeastern</code>
+<code ac="352" state="FL">Gainesville; Ocala</code>
+<code ac="356" state="—">withdrawn</code>
+<code ac="360" state="WA">Bellingham; Olympia; Vancouver</code>
+<code ac="361" state="TX">Corpus Christi</code>
+<code ac="364" state="KY">Bowling Green; Hopkinsville</code>
+<code ac="365" state="ON">Hamilton; Toronto suburbs</code>
+<code ac="369" state="—">withdrawn</code>
+<code ac="380" state="—">withdrawn</code>
+<code ac="385" state="UT">Salt Lake City; Ogden; Provo</code>
+<code ac="386" state="FL">Daytona Beach; Lake City</code>
+<code ac="401" state="RI">entire state</code>
+<code ac="402" state="NE">Omaha; Lincoln; eastern</code>
+<code ac="403" state="AB">Calgary; southern third of province</code>
+<code ac="404" state="GA">Atlanta</code>
+<code ac="405" state="OK">Oklahoma City; central</code>
+<code ac="406" state="MT">entire state</code>
+<code ac="407" state="FL">Orlando</code>
+<code ac="408" state="CA">San José; Silicon Valley</code>
+<code ac="409" state="TX">Galveston; Beaumont</code>
+<code ac="410" state="MD">Baltimore; northern and eastern</code>
+<code ac="412" state="PA">Pittsburgh</code>
+<code ac="413" state="MA">Springfield; western</code>
+<code ac="414" state="WI">Milwaukee</code>
+<code ac="415" state="CA">San Francisco; Marin County</code>
+<code ac="416" state="ON">Toronto</code>
+<code ac="417" state="MO">Springfield; Joplin; southwestern</code>
+<code ac="418" state="QC">Québec; Gaspé; southeast/sud‑est</code>
+<code ac="419" state="OH">Toledo; northwestern</code>
+<code ac="423" state="TN">Chattanooga; Johnson City</code>
+<code ac="424" state="CA">Los Angeles area: Santa Monica; Torrance</code>
+<code ac="425" state="WA">Everett; Redmond; northern/eastern Seattle area</code>
+<code ac="430" state="TX">Tyler; Texarkana; northeastern</code>
+<code ac="431" state="MB">entire province</code>
+<code ac="432" state="TX">Midland; Odessa; Big Bend</code>
+<code ac="434" state="VA">Charlottesville; Lynchburg; Emporia</code>
+<code ac="435" state="UT">Logan; most of the state</code>
+<code ac="437" state="ON">city of Toronto</code>
+<code ac="438" state="QC">Montréal; Île-Perrot</code>
+<code ac="440" state="OH">Lorain; Ashtabula</code>
+<code ac="441" state="—">Bermuda</code>
+<code ac="442" state="CA">Escondido; Palm Springs; Death Valley</code>
+<code ac="443" state="MD">Baltimore; northern and eastern</code>
+<code ac="445" state="—">withdrawn</code>
+<code ac="447" state="IL">Champaign; Springfield</code>
+<code ac="450" state="QC">Laval; Longueuil; suburbs/banlieues of Montréal</code>
+<code ac="458" state="OR">Eugene; most of the state</code>
+<code ac="464" state="—">withdrawn</code>
+<code ac="469" state="TX">Dallas and suburbs</code>
+<code ac="470" state="GA">Atlanta and suburbs</code>
+<code ac="473" state="—">Grenada (Caribbean)</code>
+<code ac="475" state="CT">New Haven; Bridgeport; NYC suburbs</code>
+<code ac="478" state="GA">Macon; central</code>
+<code ac="479" state="AR">Ft. Smith; Fayetteville; northwestern</code>
+<code ac="480" state="AZ">Scottsdale; east Phoenix area</code>
+<code ac="484" state="PA">Allentown; outer Philadelphia suburbs</code>
+<code ac="500" state="—">Personal Communications Services (premium charges may apply)</code>
+<code ac="501" state="AR">Little Rock; central</code>
+<code ac="502" state="KY">Louisville; Frankfort</code>
+<code ac="503" state="OR">Portland; Salem; Astoria; Tillamook</code>
+<code ac="504" state="LA">New Orleans</code>
+<code ac="505" state="NM">Albuquerque; Santa Fe; northwest</code>
+<code ac="506" state="NB">entire province</code>
+<code ac="507" state="MN">Rochester; southern</code>
+<code ac="508" state="MA">Worcester; Cape Cod; southeastern</code>
+<code ac="509" state="WA">Spokane; eastern</code>
+<code ac="510" state="CA">Oakland</code>
+<code ac="512" state="TX">Austin</code>
+<code ac="513" state="OH">Cincinnati</code>
+<code ac="514" state="QC">Montréal; Île-Perrot</code>
+<code ac="515" state="IA">Des Moines; Ames; Ft. Dodge</code>
+<code ac="516" state="NY">Nassau County (western Long Island)</code>
+<code ac="517" state="MI">Lansing</code>
+<code ac="518" state="NY">Albany; northeastern</code>
+<code ac="519" state="ON">London; Windsor; southern</code>
+<code ac="520" state="AZ">Tucson; southeastern</code>
+<code ac="530" state="CA">Redding; Lake Tahoe; northeastern</code>
+<code ac="531" state="NE">Omaha; Lincoln; eastern</code>
+<code ac="534" state="WI">Eau Claire; northern; northwestern</code>
+<code ac="539" state="OK">Tulsa; northeastern</code>
+<code ac="540" state="VA">Harrisonburg; Roanoke; western</code>
+<code ac="541" state="OR">Eugene; most of the state</code>
+<code ac="548" state="ON">London; Windsor; southern</code>
+<code ac="551" state="NJ">Hackensack; Jersey City</code>
+<code ac="557" state="—">withdrawn</code>
+<code ac="559" state="CA">Fresno</code>
+<code ac="561" state="FL">Palm Beach County</code>
+<code ac="562" state="CA">Los Angeles area: Long Beach</code>
+<code ac="563" state="IA">Davenport/Quad Cities; Dubuque; Decorah</code>
+<code ac="564" state="—">withdrawn</code>
+<code ac="567" state="OH">Toledo; northwest</code>
+<code ac="570" state="PA">Scranton; Wilkes-Barre</code>
+<code ac="571" state="VA">Arlington; suburbs of Washington D.C.</code>
+<code ac="573" state="MO">Columbia; Jefferson City; central and eastern</code>
+<code ac="574" state="IN">South Bend</code>
+<code ac="575" state="NM">Las Cruces; Taos; most of the state</code>
+<code ac="579" state="QC">Laval; Longueuil; suburbs/banlieues of Montréal</code>
+<code ac="580" state="OK">Lawton; Enid; Ada</code>
+<code ac="581" state="QC">Québec; Gaspé; southeastern</code>
+<code ac="582" state="PA">new code to be added to 814 area (Erie; Altoona) circa 2014</code>
+<code ac="585" state="NY">Rochester</code>
+<code ac="586" state="MI">Warren; Macomb County</code>
+<code ac="587" state="AB">entire province</code>
+<code ac="600" state="—">Canada: special purposes (e.g.; caller-pays cellular) / Services non-géographiques canadiens</code>
+<code ac="601" state="MS">Jackson; Hattiesburg; central</code>
+<code ac="602" state="AZ">Phoenix</code>
+<code ac="603" state="NH">entire state</code>
+<code ac="604" state="BC">Vancouver</code>
+<code ac="605" state="SD">entire state</code>
+<code ac="606" state="KY">Ashland; rural E. KY</code>
+<code ac="607" state="NY">Binghamton; south central</code>
+<code ac="608" state="WI">Madison; southwestern</code>
+<code ac="609" state="NJ">Atlantic City; Trenton</code>
+<code ac="610" state="PA">Allentown; outer Philadelphia suburbs</code>
+<code ac="612" state="MN">Minneapolis</code>
+<code ac="613" state="ON">Ottawa; eastern</code>
+<code ac="614" state="OH">Columbus</code>
+<code ac="615" state="TN">Nashville</code>
+<code ac="616" state="MI">Grand Rapids</code>
+<code ac="617" state="MA">Boston</code>
+<code ac="618" state="IL">East St. Louis; southern</code>
+<code ac="619" state="CA">San Diego; Coronado</code>
+<code ac="620" state="KS">southern Kansas</code>
+<code ac="623" state="AZ">Glendale; west Phoenix area</code>
+<code ac="626" state="CA">Los Angeles area: Pasadena; San Gabriel Valley</code>
+<code ac="627" state="—">withdrawn</code>
+<code ac="628" state="CA">San Francisco; Marin County</code>
+<code ac="629" state="TN">Nashville; central and north central</code>
+<code ac="630" state="IL">Hinsdale; some western suburbs of Chicago</code>
+<code ac="631" state="NY">Suffolk County</code>
+<code ac="636" state="MO">St. Charles</code>
+<code ac="639" state="SK">entire province</code>
+<code ac="641" state="IA">Mason City; Marshalltown</code>
+<code ac="646" state="NY">New York City: Manhattan</code>
+<code ac="647" state="ON">Toronto</code>
+<code ac="649" state="—">Turks and Caicos Islands (Caribbean)</code>
+<code ac="650" state="CA">San Mateo; peninsula; San Francisco Airport [SFO]</code>
+<code ac="651" state="MN">St. Paul; eastern Twin Cities area</code>
+<code ac="657" state="CA">Anaheim; northern Orange County</code>
+<code ac="659" state="—">withdrawn</code>
+<code ac="660" state="MO">Sedalia; north central</code>
+<code ac="661" state="CA">Bakersfield; northern Los Angeles County</code>
+<code ac="662" state="MS">northern half; Greenville; Tupelo</code>
+<code ac="664" state="—">Montserrat (Caribbean)</code>
+<code ac="667" state="MD">Baltimore; northern and eastern</code>
+<code ac="669" state="CA">San José; Silicon Valley</code>
+<code ac="670" state="MP">CNMI / Mariana Islands / U.S. Pacific; (Saipan)</code>
+<code ac="671" state="GU">Guam/U.S. Pacific</code>
+<code ac="678" state="GA">Atlanta and suburbs</code>
+<code ac="679" state="—">withdrawn</code>
+<code ac="681" state="WV">entire state</code>
+<code ac="682" state="TX">Fort Worth</code>
+<code ac="684" state="AS">American Samoa (entire territory)</code>
+<code ac="689" state="—">withdrawn</code>
+<code ac="700" state="—">Special purposes: dependent on long-distance carrier used (premium charges may apply)</code>
+<code ac="701" state="ND">entire state</code>
+<code ac="702" state="NV">Las Vegas; Clark County</code>
+<code ac="703" state="VA">Arlington; suburbs of Washington DC</code>
+<code ac="704" state="NC">Charlotte</code>
+<code ac="705" state="ON">Sudbury; north central</code>
+<code ac="706" state="GA">Athens; Columbus; Augusta; Rome</code>
+<code ac="707" state="CA">north coast and wine country: Santa Rosa; Napa; Vallejo</code>
+<code ac="708" state="IL">La Grange; some southern/western suburbs of Chicago</code>
+<code ac="709" state="NL">Newfoundland and Labrador; entire province</code>
+<code ac="710" state="US">U.S. Federal Government; authorized users only</code>
+<code ac="712" state="IA">Sioux City; Council Bluffs; western</code>
+<code ac="713" state="TX">Houston and suburbs</code>
+<code ac="714" state="CA">Anaheim; northern Orange Co.</code>
+<code ac="715" state="WI">Eau Claire; northern/northwestern</code>
+<code ac="716" state="NY">Buffalo; western tip</code>
+<code ac="717" state="PA">Harrisburg</code>
+<code ac="718" state="NY">NYC: Bronx; Brooklyn; Queens; Staten Island</code>
+<code ac="719" state="CO">Colorado Springs; southeastern</code>
+<code ac="720" state="CO">Denver</code>
+<code ac="721" state="—">Sint Maarten (Dutch Caribbean)</code>
+<code ac="724" state="PA">New Castle; western</code>
+<code ac="725" state="NV">Las Vegas</code>
+<code ac="727" state="FL">St. Petersburg</code>
+<code ac="730" state="IL">East St. Louis; southern</code>
+<code ac="731" state="TN">Jackson; western TN</code>
+<code ac="732" state="NJ">New Brunswick; northern Jersey Shore region</code>
+<code ac="734" state="MI">Ann Arbor; Monroe; S. Detroit suburbs and Metro Airport [DTW]</code>
+<code ac="737" state="TX">Austin</code>
+<code ac="740" state="OH">Marion; Zanesville; southeastern</code>
+<code ac="747" state="CA">Los Angeles area: San Fernando</code>
+<code ac="752" state="—">withdrawn</code>
+<code ac="754" state="FL">Ft. Lauderdale; Broward County</code>
+<code ac="757" state="VA">Norfolk</code>
+<code ac="758" state="—">St. Lucia (Caribbean)</code>
+<code ac="760" state="CA">Escondido; Palm Springs; Death Valley</code>
+<code ac="762" state="GA">Athens; Columbus; Augusta; Rome</code>
+<code ac="763" state="MN">northwest suburbs of Minneapolis</code>
+<code ac="764" state="—">withdrawn</code>
+<code ac="765" state="IN">Lafayette; Muncie</code>
+<code ac="767" state="—">Dominica (Caribbean)</code>
+<code ac="769" state="MS">Jackson; Hattiesburg; central</code>
+<code ac="770" state="GA">Atlanta suburbs</code>
+<code ac="772" state="FL">Ft. Pierce; central east coast of Florida</code>
+<code ac="773" state="IL">Chicago/uptown</code>
+<code ac="774" state="MA">Worcester; Cape Cod; southeastern</code>
+<code ac="775" state="NV">Reno; most of Nevada</code>
+<code ac="778" state="BC">entire province</code>
+<code ac="779" state="IL">Rockford; Joliet; northern</code>
+<code ac="780" state="AB">Edmonton; northern</code>
+<code ac="781" state="MA">Lexington; suburbs of Boston</code>
+<code ac="782" state="NS"></code>
+<code ac="784" state="—">St. Vincent and the Grenadines (Caribbean)</code>
+<code ac="785" state="KS">Topeka; north central; northwestern</code>
+<code ac="786" state="FL">Miami; Key West</code>
+<code ac="787" state="PR">Puerto Rico</code>
+<code ac="800" state="—">Toll-free services</code>
+<code ac="801" state="UT">Salt Lake City; Provo; Ogden</code>
+<code ac="802" state="VT">entire state</code>
+<code ac="803" state="SC">Columbia; central</code>
+<code ac="804" state="VA">Richmond; Petersburg</code>
+<code ac="805" state="CA">San Luis Obispo; Oxnard</code>
+<code ac="806" state="TX">Amarillo; Lubbock; panhandle</code>
+<code ac="807" state="ON">Thunder Bay; northwestern</code>
+<code ac="808" state="HI">entire state</code>
+<code ac="809" state="—">Dominican Republic (Caribbean)</code>
+<code ac="810" state="MI">Flint; Port Huron; NE Detroit suburbs</code>
+<code ac="812" state="IN">Evansville; southern</code>
+<code ac="813" state="FL">Tampa</code>
+<code ac="814" state="PA">Altoona; Erie</code>
+<code ac="815" state="IL">Rockford; Joliet; northern</code>
+<code ac="816" state="MO">Kansas City; St. Joseph</code>
+<code ac="817" state="TX">Ft. Worth</code>
+<code ac="818" state="CA">Los Angeles area: San Fernando</code>
+<code ac="819" state="QC">Sherbrooke; Hull; Trois-Rivières; Kuujjuaq; central; western; and northern / centre; ouest; et nord</code>
+<code ac="822" state="—">future toll-free services</code>
+<code ac="825" state="AB">Alberta; Canada</code>
+<code ac="828" state="NC">Asheville; western tip</code>
+<code ac="829" state="—">Dominican Republic</code>
+<code ac="830" state="TX">Del Rio; New Braunfels</code>
+<code ac="831" state="CA">Monterey; Santa Cruz</code>
+<code ac="832" state="TX">Houston and suburbs</code>
+<code ac="833" state="—">future toll-free services</code>
+<code ac="835" state="—">withdrawn</code>
+<code ac="843" state="SC">Charleston; coastal</code>
+<code ac="844" state="—">toll-free services</code>
+<code ac="845" state="NY">Poughkeepsie; N. suburbs of NYC</code>
+<code ac="847" state="IL">Skokie; northern suburbs of Chicago</code>
+<code ac="848" state="NJ">New Brunswick; northern Jersey Shore region</code>
+<code ac="849" state="—">Dominican Republic</code>
+<code ac="850" state="FL">Tallahassee; Pensacola; panhandle</code>
+<code ac="855" state="—">toll-free services</code>
+<code ac="856" state="NJ">Camden; Vineland; southwestern</code>
+<code ac="857" state="MA">Boston</code>
+<code ac="858" state="CA">La Jolla; near north suburbs of San Diego</code>
+<code ac="859" state="KY">Lexington; Covington</code>
+<code ac="860" state="CT">Hartford; northern and eastern</code>
+<code ac="862" state="NJ">Newark; Paterson</code>
+<code ac="863" state="FL">Lakeland; Okeechobee</code>
+<code ac="864" state="SC">Greenville; Spartanburg; northwestern</code>
+<code ac="865" state="TN">Knoxville</code>
+<code ac="866" state="—">Toll-free services</code>
+<code ac="867" state="—">Yukon; Northwest Terr.; Nunavut</code>
+<code ac="868" state="—">Trinidad and Tobago (Caribbean)</code>
+<code ac="869" state="—">St. Kitts and Nevis (Caribbean)</code>
+<code ac="870" state="AR">Jonesboro; Pine Bluff; most of the state</code>
+<code ac="872" state="IL">Chicago</code>
+<code ac="873" state="QC">Sherbrooke; Hull; Trois-Rivières; Kuujjuaq; central; western; and northern / centre; ouest; et nord</code>
+<code ac="876" state="—">Jamaica (Caribbean)</code>
+<code ac="877" state="—">Toll-free services</code>
+<code ac="878" state="PA">Pittsburgh; New Castle</code>
+<code ac="880" state="—">withdrawn</code>
+<code ac="881" state="—">withdrawn</code>
+<code ac="882" state="—">withdrawn</code>
+<code ac="888" state="—">Toll-free services</code>
+<code ac="900" state="—">Premium pay-per-call services</code>
+<code ac="901" state="TN">Memphis</code>
+<code ac="902" state="NS"></code>
+<code ac="903" state="TX">Tyler; Texarkana; northeastern</code>
+<code ac="904" state="FL">Jacksonville</code>
+<code ac="905" state="ON">Hamilton; Toronto suburbs</code>
+<code ac="906" state="MI">Sault Ste. Marie; upper peninsula</code>
+<code ac="907" state="AK">entire state</code>
+<code ac="908" state="NJ">Elizabeth</code>
+<code ac="909" state="CA">San Bernardino; Ontario</code>
+<code ac="910" state="NC">Wilmington; Fayetteville; southeastern</code>
+<code ac="912" state="GA">Savannah; southeastern</code>
+<code ac="913" state="KS">Kansas City; Leavenworth</code>
+<code ac="914" state="NY">White Plains; Westchester County</code>
+<code ac="915" state="TX">El Paso; western tip</code>
+<code ac="916" state="CA">Sacramento</code>
+<code ac="917" state="NY">New York City: overlays all 5 boroughs</code>
+<code ac="918" state="OK">Tulsa; northeastern</code>
+<code ac="919" state="NC">Raleigh</code>
+<code ac="920" state="WI">Green Bay; northeastern</code>
+<code ac="925" state="CA">Concord; Walnut Creek; Livermore; inland East Bay</code>
+<code ac="928" state="AZ">Flagstaff; Yuma; most of the state</code>
+<code ac="929" state="NY">NYC: Bronx; Brooklyn; Queens; and Staten Island</code>
+<code ac="930" state="IN">Evansville; southern Indiana</code>
+<code ac="931" state="TN">Clarksville; central</code>
+<code ac="935" state="—">withdrawn</code>
+<code ac="936" state="TX">Huntsville; Nacogdoches</code>
+<code ac="937" state="OH">Dayton</code>
+<code ac="938" state="AL">Huntsville; northern</code>
+<code ac="939" state="PR">Puerto Rico</code>
+<code ac="940" state="TX">Wichita Falls; Denton</code>
+<code ac="941" state="FL">Sarasota</code>
+<code ac="947" state="MI">Pontiac; Troy; NW Detroit suburbs</code>
+<code ac="949" state="CA">Irvine; Newport Beach; southern Orange County</code>
+<code ac="951" state="CA">Riverside</code>
+<code ac="952" state="MN">Bloomington; SW suburbs of Minneapolis</code>
+<code ac="954" state="FL">Ft. Lauderdale; Broward County</code>
+<code ac="956" state="TX">Brownsville; Laredo; Rio Grande Valley</code>
+<code ac="959" state="CT">Hartford; northern and eastern</code>
+<code ac="970" state="CO">Grand Junction; northern and western</code>
+<code ac="971" state="OR">Portland; Salem; Tillamook; Astoria</code>
+<code ac="972" state="TX">Dallas and suburbs</code>
+<code ac="973" state="NJ">Newark; Paterson</code>
+<code ac="975" state="—">withdrawn</code>
+<code ac="978" state="MA">Lowell; Leominster; northeastern</code>
+<code ac="979" state="TX">Bryan/College Station; Wharton</code>
+<code ac="980" state="NC">Charlotte</code>
+<code ac="984" state="NC">Raleigh</code>
+<code ac="985" state="LA">Hammond; Houma</code>
+<code ac="989" state="MI">Saginaw</code>
+</area_codes>
+</config>

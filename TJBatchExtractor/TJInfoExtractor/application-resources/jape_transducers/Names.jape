@@ -1,0 +1,43 @@
+/*
+   File:        Names.jape
+   Author:      Kyle Miller
+   Created:     July, 2014
+   Description: a GATE JAPE file that attempts to annotate information in text
+
+   Copyright (C) 2014, Carnegie Mellon University
+*/
+/* 
+ * This file is free software,
+ * licenced under the GNU Library General Public License, Version 3, June 2007
+ * (in the distribution as file licence.html)  
+ * 
+ */
+Phase:names
+Input: Token Lookup SkinColor HairColor EyeColor Url
+Options: control = appelt negationGrouping = false
+
+Rule: Firstname
+({!Lookup.minorType == noprename})
+(
+ {Lookup.majorType == person_first, !Lookup within Url, Lookup.minorType == female, !SkinColor, !HairColor, !EyeColor}
+):name
+-->
+{
+  AnnotationSet Set = bindings.get("name");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "Firstname");
+  try {
+      features.put("name", doc.getContent().getContent(start,end).toString().toLowerCase());
+      outputAS.add(start, end, "Name", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }  
+}
+
+Rule: Firstname2
+({Lookup.majorType == NamePre})
+({Token.kind == word}):name
+-->
+:name.Name = {rule = Firstname2, name = :name.Token.string}

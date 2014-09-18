@@ -1,0 +1,75 @@
+Imports: {
+  import java.math.BigInteger;  
+}
+
+Phase:timepass2
+Input: Duration Lookup Number Integer
+Options: control = first
+
+Rule: SimpleDuration
+({Lookup.majorType == time_unit, Lookup.minorType==hour, !Lookup within Duration}
+|
+{Lookup.majorType == time_unit, Lookup.minorType==day, !Lookup within Duration}):tm
+-->
+{  
+    AnnotationSet tmSet = bindings.get("tm");
+    Annotation tmAnn = (tmSet == null || tmSet.isEmpty()) ? null : tmSet.iterator().next();
+    String type = (tmAnn == null) ? "none" : tmAnn.getFeatures().get("minorType").toString().toLowerCase();
+    Long start = tmSet.firstNode().getOffset();
+    Long end = tmSet.lastNode().getOffset(); 
+
+//     AnnotationSet toremove = inputAS.get(start,end).get("PhoneNumber");
+//     if( toremove!=null) inputAS.removeAll(toremove);
+
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("type", type);
+    features.put("rule", "SimpleDuration");
+    try {
+      features.put("duration", doc.getContent().getContent(start,end).toString().toLowerCase());
+    } catch(InvalidOffsetException ioe){
+      features.put("duration", "none");
+    }
+    try {
+      outputAS.add(start, end, "Duration", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+Rule: SimpleDuration2
+({Number.value == "0.25", !Number within Duration}|
+ {Number.value == "0.5", !Number within Duration}|
+ {Integer.value == "1", !Integer within Duration}|
+ {Number.value == "1.5", !Number within Duration}|
+ {Integer.value == "15", !Integer within Duration}|
+ {Integer.value == "20", !Integer within Duration}|
+ {Integer.value == "30", !Integer within Duration}|
+ {Integer.value == "45", !Integer within Duration}|
+ {Integer.value == "60", !Integer within Duration}|
+ {Integer.value == "90", !Integer within Duration}):tgt
+ -->
+ {      
+    AnnotationSet Set = bindings.get("tgt");    
+    Long start = Set.firstNode().getOffset();
+    Long end = Set.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("type", "UnitlessNumber");
+    features.put("rule", "SimpleDuration2");
+    //try {
+      Annotation Ann = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+      double duration = -1.0;
+      if(Ann != null){
+         if(Ann.getType()=="Number")  duration = ((Double) Ann.getFeatures().get("value"));
+         else if(Ann.getType()=="Integer") duration = ((BigInteger) Ann.getFeatures().get("value")).doubleValue();
+      }
+      features.put("duration", duration);
+      //features.put("duration", doc.getContent().getContent(start,end).toString().toLowerCase());
+    //} catch(InvalidOffsetException ioe){
+    //  features.put("duration", "none");
+    //}
+    try {
+      outputAS.add(start, end, "PossibleDuration", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}

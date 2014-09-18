@@ -1,0 +1,9 @@
+Phase:percent
+Input: Token Integer Lookup
+Options: control = appelt
+
+Rule: PercentClean
+({ Integer.type == numbers } {Lookup.majorType==percent}):num
+-->
+:num.Percent = {rule = PercentClean}
+

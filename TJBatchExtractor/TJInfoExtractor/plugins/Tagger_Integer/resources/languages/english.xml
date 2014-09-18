@@ -1,0 +1,58 @@
+<config>
+  <description>English</description>
+  <words_ones>
+    <word value="0">zero</word>    
+    <word value="1">one</word>
+    <word value="2">two</word>
+    <word value="3">three</word>
+    <word value="4">four</word>    
+    <word value="5">five</word>
+    <word value="6">six</word>
+    <word value="7">seven</word>
+    <word value="8">eight</word>
+    <word value="9">nine</word>
+  </words_ones>
+  <words_teens>
+    <word value="10">ten</word>
+    <word value="11">eleven</word>
+    <word value="12">twelve</word>
+    <word value="13">thirteen</word>
+    <word value="14">fourteen</word>
+    <word value="15">fifteen</word>
+    <word value="16">sixteen</word>
+    <word value="17">seventeen</word>
+    <word value="18">eighteen</word>
+    <word value="19">nineteen</word>
+  </words_teens>
+  <words_tens>
+    <word value="20">twenty</word>
+    <word value="30">thirty</word>
+    <word value="40">forty</word>
+    <word value="50">fifty</word>
+    <word value="60">sixty</word>
+    <word value="70">seventy</word>
+    <word value="80">eighty</word>
+    <word value="90">ninety</word>
+  </words_tens>
+  <multipliers>
+    <word value="2">hundred</word>
+    <word value="2">hundreds</word>
+    <word value="3">thousand</word>
+    <word value="3">thousands</word>
+    <word value="6">million</word>
+    <word value="6">millions</word>
+    <word value="9">billion</word>
+    <word value="9">billions</word>
+    <word value="12">trillion</word>
+    <word value="15">quadrillion</word>
+    <word value="18">quintillion</word>
+    <word value="21">sextillion</word>
+    <word value="24">septillion</word>
+    <word value="27">octillion</word>
+    <word value="30">nonillion</word>
+    <word value="33">decillion</word>
+  </multipliers>
+  <conjunctions>
+    <word whole="true">and</word>
+  </conjunctions>
+</config>

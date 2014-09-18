@@ -1,0 +1,84 @@
+/*
+   File:        email.jape
+   Author:      Kyle Miller
+   Created:     July, 2014
+   Description: a GATE JAPE file that attempts to annotate information in text
+
+   Copyright (C) 2014, Carnegie Mellon University
+*/
+/* 
+ * This file is free software,
+ * licenced under the GNU Library General Public License, Version 2, June 1991
+ * (in the distribution as file licence.html)  
+ * 
+ * This file was created by modifying email.jape distributed with GATE (see http://gate.ac.uk/)
+ */
+
+Phase:	Email
+Input:  Token Lookup SpaceToken DotCom
+Options: control = appelt
+
+
+// Email rules
+
+Rule:Emailaddress1
+Priority: 50
+(
+ (
+  {Token.kind == word}|
+  {Token.kind == number}
+ )+
+ (
+  {Token.string == "_"}
+ )?
+ (({Token.string == "."} | {DotCom.kind==dot}))?
+  ({Token.kind == word}|
+   {Token.kind == number}|
+   {Token.string == "_"}
+  )*
+ 
+ {Token.string == "@"}		
+ (
+  {Token.kind == word}|
+  {Token.kind == symbol}|
+  {Token.kind == punctuation}|
+  {Token.kind == number}
+ )
+ (({Token.string == "."} | {DotCom.kind==dot}))?
+ (
+  {Token.kind == word}|
+  {Token.kind == symbol}|
+  {Token.kind == punctuation}|
+  {Token.kind == number}
+ )*
+ (({Token.string == "."} | {DotCom.kind==dot}))?
+(
+  {Token.kind == word}|
+  {Token.kind == symbol}|
+  {Token.kind == punctuation}|
+  {Token.kind == number}
+ )?
+(({Token.string == "."} | {DotCom.kind==dot}))?
+ (
+  ({Token.string == "."} | {DotCom.kind==dot})		
+  (
+   {Token.kind == word}|
+   {Token.kind == number}	
+  )
+  (({Token.string == "."} | {DotCom.kind==dot}))?
+  (
+   {Token.kind == word}|
+   {Token.kind == number}	
+  )?
+  (({Token.string == "."} | {DotCom.kind==dot}))?
+  (
+   {Token.kind == word}|
+   {Token.kind == number}	
+  )?
+ )
+)
+:emailAddress -->
+  :emailAddress.Email= {kind = "emailAddress", rule = "Emailaddress1"}
+
+
+

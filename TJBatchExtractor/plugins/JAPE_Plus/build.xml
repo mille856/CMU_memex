@@ -1,0 +1,98 @@
+<project name="JAPE-Plus" basedir="." default="build" >
+  <!-- Prevent Ant from warning about includeantruntime not being set -->
+  <property name="build.sysclasspath" value="ignore" />	
+  
+  <property file="build.properties" />
+
+  <!-- Make environment variables available -->
+  <property environment="env" />
+
+  <!-- If environment variable GATE_HOME is set, use it for
+       gate.home (unless it was already set in build.properties -->
+  <condition property="gate.home" value="${env.GATE_HOME}">
+    <isset property="env.GATE_HOME"/>
+  </condition>
+
+  <!-- If gate.home is not set from build.properties or the 
+       environment variable GATE_HOME, assume that this
+       plugin is in GATE Developer's plugin directory -->
+  <property name="gate.home" location="../.." />
+  <property name="src.dir" location="src" />
+  <property name="classes.dir" location="classes" />
+  <property name="lib.dir" location="lib" />
+	<property name="doc.dir" location="doc" />
+  <property name="javadoc.dir" location="${doc.dir}/javadoc" />
+  <property name="jar.location" location="jape-plus.jar" />
+
+  <!-- Path to compile - includes gate.jar and GATE/lib/*.jar -->
+  <path id="compile.classpath">
+    <pathelement location="${lib.dir}/colt-1.2.0-free.jar" />
+    <pathelement location="${gate.home}/bin/gate.jar" />
+    <fileset dir="${gate.home}/lib">
+      <include name="**/*.jar" />
+      <include name="**/*.zip" />
+    </fileset>
+  </path>
+
+  <!-- create build directory structure -->
+  <target name="prepare">
+    <mkdir dir="${classes.dir}" />
+  </target>
+
+  <!-- compile the source -->
+  <target name="compile" depends="prepare">
+    <javac classpathref="compile.classpath"
+           srcdir="${src.dir}"
+           destdir="${classes.dir}"
+           debug="true"
+           debuglevel="lines,source"
+           encoding="UTF-8"
+           source="1.5" target="1.5" />
+  </target>
+
+  <!-- create the JAR file -->
+  <target name="jar" depends="compile" >
+    <jar destfile="${jar.location}"
+         update="false"
+         basedir="${classes.dir}" />
+  </target>
+
+  <!-- remove the generated .class files -->
+  <target name="clean.classes" >
+    <delete dir="${classes.dir}" />
+  </target>
+
+  <!-- Clean up - remove .class and .jar files -->
+  <target name="clean" depends="clean.classes" >
+    <delete file="${jar.location}" />
+  </target>
+
+  <!-- Build JavaDoc documentation -->
+  <target name="doc.prepare">
+    <mkdir dir="${javadoc.dir}" />
+  </target>
+
+  <target name="javadoc" depends="doc.prepare">
+    <javadoc destdir="${javadoc.dir}" packagenames="*"
+             classpathref="compile.classpath"
+             encoding="UTF-8"
+             windowtitle="${plugin.name} JavaDoc"
+             source="1.6">
+      <sourcepath>
+        <pathelement location="${src.dir}" />
+      </sourcepath>
+      <link href="http://docs.oracle.com/javase/6/docs/api/" />
+      <link href="http://gate.ac.uk/gate/doc/javadoc/" />
+    </javadoc>
+  </target>
+	
+  <!-- Targets used by the main GATE build file:
+         build: build the plugin - just calls "jar" target
+         test : run the unit tests - there aren't any
+         distro.prepare: remove intermediate files that shouldn't be in the
+                         distribution
+  -->
+  <target name="build" depends="jar" />
+  <target name="test" />
+  <target name="distro.prepare" depends="clean.classes" />
+</project>

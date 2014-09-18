@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project basedir="." default="all" name="tools">
+  <!-- Prevent Ant from warning about includeantruntime not being set -->
+  <property name="build.sysclasspath" value="ignore" />
+
+  <property file="build.properties" />
+  <property name="plugin.name" value="Tools"/>
+
+  <!-- Make environment variables available -->
+  <property environment="env" />
+
+  <!-- If environment variable GATE_HOME is set, use it for
+       gate.home (unless it was already set in build.properties -->
+  <condition property="gate.home" value="${env.GATE_HOME}">
+    <isset property="env.GATE_HOME"/>
+  </condition>
+
+  <property name="dest" value="classes"/>
+  <property name="gate.home" value="../.."/>
+  <property name="src" value="src"/>
+  <property name="doc.dir" location="doc" />
+  <property name="javadoc.dir" location="${doc.dir}/javadoc" />
+
+  <fileset id="gatelib.classpath" dir="${gate.home}/lib">
+    <include name="*.jar"/>
+    <include name="*.zip"/>
+  </fileset>
+
+  <fileset id="gate.classpath" dir="${gate.home}/bin">
+    <include name="*.jar"/>
+    <include name="*.zip"/>
+  </fileset>
+
+  <path id="compile.classpath">
+	<fileset refid="gatelib.classpath"/>
+	<fileset refid="gate.classpath"/>
+  </path>
+
+  <target name="jar" depends="compile">
+    <jar compress="false" destfile="tools.jar">
+      <fileset dir="${dest}"/>
+    </jar>
+  </target>
+
+
+  <target name="compile" depends="init">
+    <javac encoding="utf-8" classpathref="compile.classpath" debug="true" deprecation="true" destdir="${dest}" nowarn="false" source="1.6" target="1.6">
+      <src path="${src}"/>
+    </javac>
+  </target>
+
+  <!-- Build JavaDoc documentation -->
+  <target name="doc.prepare">
+    <mkdir dir="${javadoc.dir}" />
+  </target>
+
+  <target name="javadoc" depends="doc.prepare">
+    <javadoc destdir="${javadoc.dir}" packagenames="*"
+             classpathref="compile.classpath"
+             encoding="UTF-8"
+             windowtitle="${plugin.name} JavaDoc"
+             source="1.6">
+      <sourcepath>
+        <pathelement location="${src}" />
+      </sourcepath>
+      <link href="http://docs.oracle.com/javase/6/docs/api/" />
+      <link href="http://gate.ac.uk/gate/doc/javadoc/" />
+    </javadoc>
+  </target>
+
+  <target name="clean.classes">
+    <delete failonerror="false" includeemptydirs="true">
+      <fileset dir="${dest}"/>
+    </delete>
+  </target>
+
+  <target name="clean" depends="clean.classes">
+    <delete file="tools.jar"/>
+  </target>
+
+  <target name="init">
+    <mkdir dir="${dest}"/>
+  </target>
+
+  <!-- Build everything - the code and JavaDoc -->
+  <target name="all" depends="jar, javadoc" />
+
+  <!-- targets required by the top-level build file -->
+  <target name="build" depends="jar"/>
+  <target name="distro.prepare" depends="clean.classes" />
+  <target name="test" />
+
+</project>

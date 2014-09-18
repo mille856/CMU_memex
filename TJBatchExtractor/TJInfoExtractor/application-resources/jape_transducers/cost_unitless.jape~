@@ -1,0 +1,162 @@
+Imports: {
+  import java.math.BigInteger;  
+}
+
+Phase:costpass2
+Input: Token Integer Number Lookup Cost Duration PossibleDuration PhoneNumber Percent measurement
+Options: control = appelt negationGrouping = false
+
+Rule: CostRule_unitlessDuration_L_rep3
+(({PossibleDuration}):tgt1
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,2]
+({ Integer.value>=35, !Integer within Duration, !Cost, !Integer within measurement}):num1
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,5]
+({PossibleDuration}):tgt2
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,2]
+({ Integer.value>=35, !Integer within Duration, !Cost, !Integer within measurement }):num2
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,5]
+({PossibleDuration}):tgt3
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,2]
+({ Integer.value>=35, !Integer within Duration, !Cost, !Integer within measurement }):num3):CompleteSet
+-->
+:num1.Cost = { value=:num1.Integer.value, type=time , target_type=unitless,target_value=:tgt1.PossibleDuration.duration, rule=CostRule_unitlessDuration_L_rep3 },
+:num2.Cost = { value=:num2.Integer.value, type=time , target_type=unitless,target_value=:tgt2.PossibleDuration.duration, rule=CostRule_unitlessDuration_L_rep3 },
+:num3.Cost = { value=:num3.Integer.value, type=time , target_type=unitless,target_value=:tgt3.PossibleDuration.duration, rule=CostRule_unitlessDuration_L_rep3 },
+{
+   AnnotationSet Set = (AnnotationSet)bindings.get("CompleteSet");
+   if(Set!=null){
+     AnnotationSet toremove = inputAS.getContained(Set.firstNode().getOffset(),Set.lastNode().getOffset()).get("PhoneNumber");
+     if( toremove!=null) inputAS.removeAll(toremove);}
+}
+
+Rule: CostRule_unitlessDuration_R_rep3
+(({ Integer.value>=35, !Integer within Duration, !Cost, !Integer within measurement }):num1
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,2]
+({PossibleDuration}):tgt1
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,5]
+({ Integer.value>=35, !Integer within Duration, !Cost, !Integer within measurement }):num2
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,2]
+({PossibleDuration}):tgt2
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,5]
+({ Integer.value>=35, !Integer within Duration, !Cost, !Integer within measurement }):num3
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,2]
+({PossibleDuration}):tgt3):CompleteSet
+-->
+:num1.Cost = { value=:num1.Integer.value, type=time , target_type=unitless,target_value=:tgt1.PossibleDuration.duration, rule=CostRule_unitlessDuration_R_rep3 },
+:num2.Cost = { value=:num2.Integer.value, type=time , target_type=unitless,target_value=:tgt2.PossibleDuration.duration, rule=CostRule_unitlessDuration_R_rep3 },
+:num3.Cost = { value=:num3.Integer.value, type=time , target_type=unitless,target_value=:tgt3.PossibleDuration.duration, rule=CostRule_unitlessDuration_R_rep3 },
+{
+   AnnotationSet Set = (AnnotationSet)bindings.get("CompleteSet");
+   if(Set!=null){
+     AnnotationSet toremove = inputAS.getContained(Set.firstNode().getOffset(),Set.lastNode().getOffset()).get("PhoneNumber");
+     if( toremove!=null) inputAS.removeAll(toremove);}
+}
+
+
+Rule: CostRule_unitlessDuration_L
+({PossibleDuration.duration!=1.0, !PossibleDuration within PhoneNumber}):tgt
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,2]
+(
+   { Integer.value>=35, !Integer within Duration, !Integer within PhoneNumber, !Cost, !Percent, !Integer within measurement }
+):num
+-->
+{
+  AnnotationSet target = (AnnotationSet)bindings.get("tgt");
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num");
+  Annotation numAnn = (numSet == null || numSet.isEmpty()) ? null : numSet.iterator().next();
+  double num_val = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+        
+    Long start = numSet.firstNode().getOffset();
+    Long end = numSet.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "CostRule_unitlessDuration_L");
+    features.put("value", num_val);
+    Annotation tgtAnn = (target == null || target.isEmpty()) ? null : target.iterator().next();
+    if(tgtAnn!=null){ 
+       features.put("target_type", "number");
+       features.put("target_value", tgtAnn.getFeatures().get("duration"));
+    } else{ 
+       features.put("target_type", "none" );
+       features.put("target_value", "none" );
+    }
+    features.put("type", "time" );
+    try {
+      outputAS.add(start, end, "Cost", features);
+      outputAS.add(target.firstNode(), target.lastNode(), "Cost_Target", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+Rule: CostRule_unitlessDuration_R
+(
+   { Integer.value>=35, !Integer within Duration, !Integer within PhoneNumber, !Cost, !Percent, !Integer within measurement }
+):num
+({Token, !Integer, !Number, !Duration, !PossibleDuration, !Lookup.majorType == service})[0,2]
+({PossibleDuration.duration!=1.0, !PossibleDuration within PhoneNumber}):tgt
+-->
+{
+  AnnotationSet target = (AnnotationSet)bindings.get("tgt");
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num");
+  Annotation numAnn = (numSet == null || numSet.isEmpty()) ? null : numSet.iterator().next();
+  double num_val = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+      
+    Long start = numSet.firstNode().getOffset();
+    Long end = numSet.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "CostRule_unitlessDuration_R");
+    features.put("value", num_val);
+    Annotation tgtAnn = (target == null || target.isEmpty()) ? null : target.iterator().next();
+    if(tgtAnn!=null){ 
+       features.put("target_type", "number");
+       features.put("target_value", tgtAnn.getFeatures().get("duration"));
+    } else{ 
+       features.put("target_type", "none" );
+       features.put("target_value", "none" );
+    }
+    features.put("type", "time" );
+    try {
+      outputAS.add(start, end, "Cost", features);
+      outputAS.add(target.firstNode(), target.lastNode(), "Cost_Target", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+
+Rule: CostRule_rep2
+(
+   { Integer.value>=35, !Integer within Duration, !Integer within PhoneNumber, !Cost, !Percent, !Integer within measurement }
+):num1
+({Token.kind!=word, !Integer, !Number, !Duration,!PossibleDuration, !Lookup.majorType == service})[0,2]
+(
+   { Integer.value>=35, !Integer within Duration, !Integer within PhoneNumber, !Cost, !Percent, !Integer within measurement }
+):num2
+-->
+{  
+  AnnotationSet numSet1 = (AnnotationSet)bindings.get("num1");
+  Annotation numAnn = (numSet1 == null || numSet1.isEmpty()) ? null : numSet1.iterator().next();
+  double num_val1 = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+  
+  AnnotationSet numSet2 = (AnnotationSet)bindings.get("num2");
+  numAnn = (numSet2 == null || numSet2.isEmpty()) ? null : numSet2.iterator().next();
+  double num_val2 = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+      
+  if( num_val1<=num_val2){    
+    try {
+      FeatureMap features1 = Factory.newFeatureMap(); 
+      features1.put("rule", "CostRule_rep2");    
+      features1.put("type", "rep2" );
+      features1.put("value", num_val1);
+      outputAS.add(numSet1.firstNode().getOffset(), numSet1.lastNode().getOffset(), "Cost", features1);
+      FeatureMap features2 = Factory.newFeatureMap(); 
+      features2.put("rule", "CostRule_rep2");    
+      features2.put("type", "rep2" );
+      features2.put("value", num_val2);
+      outputAS.add(numSet2.firstNode().getOffset(), numSet2.lastNode().getOffset(), "Cost", features2);            
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+  }
+}
+

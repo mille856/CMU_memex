@@ -1,0 +1,6 @@
+<config>
+  <description>Known Area Codes</description>
+  <imports>
+    <url encoding="UTF-8">areacodes_2014-01-29.xml</url>
+  </imports>
+</config>

@@ -1,0 +1,198 @@
+Phase:haireyeskin
+Input: Token Lookup
+Options: control = all negationGrouping = false
+
+Rule: hairColor0
+(
+  (({ Lookup.majorType == color, Lookup.minorType == hairprefix})
+  ({ Token.kind == punctuation })?)?
+  { Lookup.majorType == color, Lookup.minorType == haircolor}
+):hair
+({ Token.kind == punctuation })?
+({ Lookup.majorType == color, Lookup.minorType == hairsuffix})?
+-->
+{
+  AnnotationSet Set = (AnnotationSet)bindings.get("hair");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "hairColor0");
+  try {
+      features.put("color", doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toLowerCase());
+      outputAS.add(start, end, "HairColor", features);
+  } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+  }
+}
+
+Rule: hairColor1
+(({ Lookup.majorType == color, Lookup.minorType == prefix}
+ ({ Token.kind == punctuation })?)?
+ ({ Lookup.majorType == color, Lookup.minorType == colorname }
+ ({ Token.kind == punctuation })?)?
+({ Lookup.majorType == color, Lookup.minorType == colorname }|
+{ Lookup.majorType == color, Lookup.minorType == prefix})):hair
+({Token, !Lookup.majorType==color})[0,4]
+({ Lookup.majorType == color, Lookup.minorType == hairsuffix})
+-->
+{
+  AnnotationSet Set = (AnnotationSet)bindings.get("hair");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "hairColor1");
+  try {
+      features.put("color", doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toLowerCase());
+      outputAS.add(start, end, "HairColor", features);
+  } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+  }
+}
+
+Rule: hairColor2
+({ Lookup.majorType == color, Lookup.minorType == hairsuffix})
+({ Token.string ==~ "(i?)is" })
+(({ Lookup.majorType == color, Lookup.minorType == prefix}
+ ({ Token.kind == punctuation })?)?
+ ({ Lookup.majorType == color, Lookup.minorType == colorname }
+ ({ Token.kind == punctuation })?)?
+({ Lookup.majorType == color, Lookup.minorType == colorname}|
+{ Lookup.majorType == color, Lookup.minorType == prefix})):hair
+-->
+{
+  AnnotationSet Set = (AnnotationSet)bindings.get("hair");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "hairColor2");
+  try {
+      features.put("color", doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toLowerCase());
+      outputAS.add(start, end, "HairColor", features);
+  } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+  }
+}
+
+Rule: EyeColor1
+(({ Lookup.majorType == color, Lookup.minorType == prefix}
+ ({ Token.kind == punctuation })?)?
+ ({ Lookup.majorType == color, Lookup.minorType == colorname }
+ ({ Token.kind == punctuation })?)?
+({ Lookup.majorType == color, Lookup.minorType == colorname }|
+{ Lookup.majorType == color, Lookup.minorType == prefix })):eye
+({Token, !Lookup.majorType==color})[0,4]
+({ Token.kind == punctuation })?
+({ Lookup.majorType == color, Lookup.minorType == eyesuffix })
+-->
+{
+  AnnotationSet Set = (AnnotationSet)bindings.get("eye");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "EyeColor1");
+  try {
+      features.put("color", doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toLowerCase());
+      outputAS.add(start, end, "EyeColor", features);
+  } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+  }
+}
+
+Rule: EyeColor2
+({ Lookup.majorType == color, Lookup.minorType == eyesuffix })
+({ Token.string ==~ "(i?)is|are" })
+(({ Lookup.majorType == color, Lookup.minorType == prefix}
+ ({ Token.kind == punctuation })?)?
+ ({ Lookup.majorType == color, Lookup.minorType == colorname }
+ ({ Token.kind == punctuation })?)?
+({ Lookup.majorType == color, Lookup.minorType == colorname }|
+{ Lookup.majorType == color, Lookup.minorType == prefix })):eye
+-->
+{
+  AnnotationSet Set = (AnnotationSet)bindings.get("eye");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "EyeColor2");
+  try {
+      features.put("color", doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toLowerCase());
+      outputAS.add(start, end, "EyeColor", features);
+  } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+  }
+}
+
+Rule: skinColor0
+({Token, !Token.string ==~ "(?i)no"})[3]
+(
+  (({ Lookup.majorType == color, Lookup.minorType == skinprefix})
+  ({ Token.kind == punctuation })?)?
+  { Lookup.majorType == color, Lookup.minorType == skincolor}
+):skin
+({Token, !Lookup.majorType==men, !Lookup.majorType==color})[3]
+-->
+{
+  AnnotationSet Set = (AnnotationSet)bindings.get("skin");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "skinColor0");
+  try {
+      features.put("color", doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toLowerCase());
+      outputAS.add(start, end, "SkinColor", features);
+  } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+  }
+}
+
+Rule: SkinColor1
+(({ Lookup.majorType == color, Lookup.minorType == prefix}
+ ({ Token.kind == punctuation })?)?
+ ({ Lookup.majorType == color, Lookup.minorType == colorname }
+ ({ Token.kind == punctuation })?)?
+({ Lookup.majorType == color, Lookup.minorType == colorname}|
+{ Lookup.majorType == color, Lookup.minorType == prefix}|
+{ Lookup.majorType == color, Lookup.minorType == skincolor})):skin
+({Token, !Lookup.majorType==color})[0,4]
+({ Token.kind == punctuation })?
+({ Lookup.majorType == color, Lookup.minorType == skinsuffix })
+-->
+{
+  AnnotationSet Set = (AnnotationSet)bindings.get("skin");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "SkinColor1");
+  try {
+      features.put("color", doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toLowerCase());
+      outputAS.add(start, end, "SkinColor", features);
+  } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+  }
+}
+
+Rule: SkinColor2
+({ Lookup.majorType == color, Lookup.minorType == skinsuffix })
+({ Token.string ==~ "(i?)is" })
+(({ Lookup.majorType == color, Lookup.minorType == prefix}
+ ({ Token.kind == punctuation })?)?
+ ({ Lookup.majorType == color, Lookup.minorType == colorname }
+ ({ Token.kind == punctuation })?)?
+({ Lookup.majorType == color, Lookup.minorType == colorname}|
+{ Lookup.majorType == color, Lookup.minorType == prefix}|
+{ Lookup.majorType == color, Lookup.minorType == skincolor})):skin
+-->
+{
+  AnnotationSet Set = (AnnotationSet)bindings.get("skin");
+  Long start = Set.firstNode().getOffset();
+  Long end = Set.lastNode().getOffset(); 
+  FeatureMap features = Factory.newFeatureMap(); 
+  features.put("rule", "SkinColor2");
+  try {
+      features.put("color", doc.getContent().getContent(Set.firstNode().getOffset(),Set.lastNode().getOffset()).toString().toLowerCase());
+      outputAS.add(start, end, "SkinColor", features);
+  } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+  }
+}
+

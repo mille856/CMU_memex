@@ -1,0 +1,120 @@
+Phase:cleandups
+Input: Ethnicity EyeColor HairColor SkinColor measurement
+Options: control = appelt
+
+Rule: dedup0
+(
+({Ethnicity}):ann
+)
+-->
+{
+   AnnotationSet Set = (AnnotationSet) bindings.get("ann");
+   Annotation Ann = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+   String type = Ann.getType();
+   Long start = Set.firstNode().getOffset();
+   Long end = Set.lastNode().getOffset();     
+   FeatureMap features = Factory.newFeatureMap(); 
+   features.putAll(Ann.getFeatures());
+   
+   AnnotationSet toremove = inputAS.getContained(start,end).get(type);
+   inputAS.removeAll(toremove);
+   try {
+      outputAS.add(start, end, type, features);
+   } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+   }
+}
+
+
+Rule: dedup1
+(
+({HairColor}):ann
+)
+-->
+{
+   AnnotationSet Set = (AnnotationSet) bindings.get("ann");
+   Annotation Ann = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+   String type = Ann.getType();
+   Long start = Set.firstNode().getOffset();
+   Long end = Set.lastNode().getOffset();     
+   FeatureMap features = Factory.newFeatureMap(); 
+   features.putAll(Ann.getFeatures());
+   
+   AnnotationSet toremove = inputAS.getContained(start,end).get(type);
+   inputAS.removeAll(toremove);
+   try {
+      outputAS.add(start, end, type, features);
+   } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+   }
+}
+
+
+Rule: dedup2
+(
+({EyeColor}):ann
+)
+-->
+{
+   AnnotationSet Set = (AnnotationSet) bindings.get("ann");
+   Annotation Ann = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+   String type = Ann.getType();
+   Long start = Set.firstNode().getOffset();
+   Long end = Set.lastNode().getOffset();     
+   FeatureMap features = Factory.newFeatureMap(); 
+   features.putAll(Ann.getFeatures());
+   
+   AnnotationSet toremove = inputAS.getContained(start,end).get(type);
+   inputAS.removeAll(toremove);
+   try {
+      outputAS.add(start, end, type, features);
+   } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+   }
+}
+
+Rule: dedup3
+(
+({SkinColor}):ann
+)
+-->
+{
+   AnnotationSet Set = (AnnotationSet) bindings.get("ann");
+   Annotation Ann = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+   String type = Ann.getType();
+   Long start = Set.firstNode().getOffset();
+   Long end = Set.lastNode().getOffset();     
+   FeatureMap features = Factory.newFeatureMap(); 
+   features.putAll(Ann.getFeatures());
+   
+   AnnotationSet toremove = inputAS.getContained(start,end).get(type);
+   inputAS.removeAll(toremove);
+   try {
+      outputAS.add(start, end, type, features);
+   } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+   }
+}
+
+Rule: dedup4
+(
+({measurement}):ann
+)
+-->
+{
+   AnnotationSet Set = (AnnotationSet) bindings.get("ann");
+   Annotation Ann = (Set == null || Set.isEmpty()) ? null : Set.iterator().next();
+   String type = Ann.getType();
+   Long start = Set.firstNode().getOffset();
+   Long end = Set.lastNode().getOffset();     
+   FeatureMap features = Factory.newFeatureMap(); 
+   features.putAll(Ann.getFeatures());
+   
+   AnnotationSet toremove = inputAS.getContained(start,end).get(type);
+   inputAS.removeAll(toremove);
+   try {
+      outputAS.add(start, end, type, features);
+   } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+   }
+}

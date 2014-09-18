@@ -1,0 +1,34 @@
+/*
+   File:        url_pre.jape
+   Author:      Kyle Miller
+   Created:     July, 2014
+   Description: a GATE JAPE file that attempts to annotate information in text
+
+   Copyright (C) 2014, Carnegie Mellon University
+*/
+/* 
+ * This file is free software,
+ * licenced under the GNU Library General Public License, Version 3, June 2007
+ * (in the distribution as file licence.html)  
+ * 
+ */
+Phase:	UrlPre
+Input:  Token SpaceToken DotCom
+Options: control = appelt
+
+Rule: Urlpre
+
+(	(({Token.string ==~ "(?i)http[s]?"}	|
+	  {Token.string ==~ "(?i)[s]?ftp"})
+	 {Token.string == ":"}
+	 {Token.string == "/"}
+         {Token.string == "/"}
+        )	|
+	({Token.string ==~ "(?i)www"}
+         ({Token.string == "."} | {DotCom.kind == dot})
+        )
+):urlpre
+-->
+:urlpre.UrlPre = {rule = "UrlPre"}
+
+

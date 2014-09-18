@@ -1,0 +1,91 @@
+Imports: {
+  import java.math.BigInteger;  
+}
+
+Phase:costpass1
+Input: Duration Token Integer Number Lookup Cost_Target PossibleDuration Cost PhoneNumber
+Options: control = first negationGrouping = false
+
+Rule: CostRule_dollarsign_L
+(
+  {Token.string == "$"}
+)
+(
+  { Integer.value>=35, !Cost, !Integer within Duration, !Integer within PhoneNumber}
+):num
+--> 
+{
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num");
+  Annotation numAnn = (numSet == null || numSet.isEmpty()) ? null : numSet.iterator().next();
+  double num_val = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+    
+    Long start = numSet.firstNode().getOffset();
+    Long end = numSet.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "CostRule_dollarsign_L");
+    features.put("value", num_val);
+    features.put("type", "dollar");
+    features.put("target_value", "none");
+    features.put("target_type", "none");
+    try {
+      outputAS.add(start, end, "Cost", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+
+
+Rule: CostRule_dollarsign_R
+({ Integer.value>=35, !Cost, !Integer within Duration, !Integer within PhoneNumber}):num
+({Token.string == "$"}
+ {!Integer})
+--> 
+{
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num");
+  Annotation numAnn = (numSet == null || numSet.isEmpty()) ? null : numSet.iterator().next();
+  double num_val = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+    
+    Long start = numSet.firstNode().getOffset();
+    Long end = numSet.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "CostRule_dollarsign_R");
+    features.put("value", num_val);
+    features.put("type", "dollar");
+    features.put("target_value", "none");
+    features.put("target_type", "none");
+    try {
+      outputAS.add(start, end, "Cost", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}
+
+
+Rule: CostRule_dollarword
+(
+  { Integer.value>=35, !Cost, !Integer within Duration, !Integer within PhoneNumber }
+):num
+(
+  {Lookup.majorType == UScurrency}
+)
+--> 
+{
+  AnnotationSet numSet = (AnnotationSet)bindings.get("num");
+  Annotation numAnn = (numSet == null || numSet.isEmpty()) ? null : numSet.iterator().next();
+  double num_val = (numAnn == null) ? 0 : ((BigInteger) numAnn.getFeatures().get("value")).doubleValue();
+    
+    Long start = numSet.firstNode().getOffset();
+    Long end = numSet.lastNode().getOffset(); 
+    FeatureMap features = Factory.newFeatureMap(); 
+    features.put("rule", "CostRule_dollarword");
+    features.put("value", num_val);
+    features.put("type", "dollar");
+    features.put("target_value", "none");
+    features.put("target_type", "none");
+    try {
+      outputAS.add(start, end, "Cost", features);
+    } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+    }
+}

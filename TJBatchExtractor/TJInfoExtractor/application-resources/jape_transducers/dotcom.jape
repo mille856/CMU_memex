@@ -1,0 +1,45 @@
+/*
+   File:        dotcom.jape
+   Author:      Kyle Miller
+   Created:     July, 2014
+   Description: a GATE JAPE file that attempts to annotate information in text
+
+   Copyright (C) 2014, Carnegie Mellon University
+*/
+/* 
+ * This file is free software,
+ * licenced under the GNU Library General Public License, Version 3, June 2007
+ * (in the distribution as file licence.html)  
+ * 
+ */
+
+Phase:	dotcom
+Input:  Token SpaceToken
+Options: control = appelt
+
+Rule: dot
+(
+  ( 
+    {Token.string=="."} 
+  ) 
+   |
+  (
+    ({SpaceToken} | {Token.string ==~ "[\\[\\]()\\+\\-!#%\\^\\&\\*\\\\/\\}\\{]"})[1,5]
+      ({Token.string == "."} | {Token.string ==~ "(?i)dot"} |
+       ({Token.string ==~ "[Dd]"} {Token.string ==~ "[0⓪⁰₀]"} {Token.string ==~ "[Tt]"}))
+    ({SpaceToken} | {Token.string ==~ "[\\[\\]()\\+\\-!#%\\^\\&\\*\\\\/\\}\\{]"})[1,5]
+  )   
+):dot
+-->
+:dot.DotCom = {kind = "dot"}
+
+Rule: com
+(
+({Token.string=="."} )?
+(
+{Token.string ==~ "(?i)com"} |
+({Token.string ==~ "[Cc]"} {Token.string ==~ "[0⓪⁰₀]"} {Token.string ==~ "[Mm]"})
+)
+):com
+-->
+:com.DotCom = {kind = "com"}

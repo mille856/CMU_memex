@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<GateDocument>
+<!-- The document's features-->
+
+<GateDocumentFeatures>
+<Feature>
+  <Name className="java.lang.String">gate.SourceURL</Name>
+  <Value className="java.lang.String">created from String</Value>
+</Feature>
+</GateDocumentFeatures>
+<!-- The document content area with serialized nodes -->
+
+<TextWithNodes><Node id="0" />AAA<Node id="3" />BBB<Node id="6" />AAA<Node id="9" /></TextWithNodes>
+<!-- The default annotation set -->
+
+<AnnotationSet>
+<Annotation Id="0" Type="B" StartNode="3" EndNode="6">
+</Annotation>
+<Annotation Id="1" Type="A" StartNode="0" EndNode="9">
+<Feature>
+  <Name className="java.lang.String">feat</Name>
+  <Value className="java.lang.String">val</Value>
+</Feature>
+</Annotation>
+</AnnotationSet>
+
+</GateDocument>

@@ -1,0 +1,9 @@
+
+Phase: testOnto
+Input: Token SpaceToken
+
+
+Rule: rule1
+({Token.class == "Person"}):label
+-->
+:label.Match = {}

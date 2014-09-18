@@ -1,0 +1,34 @@
+Phase:restrictions
+Input: Token Lookup Integer
+Options: control = appelt
+
+Rule: restriction0
+(({Token.string ==~ "(?i)no"})
+( { Lookup.majorType == country_adj } | { Lookup.majorType == color, Lookup.minorType==skincolor } |  { Lookup.majorType == country_adj_plural }):eth
+({Lookup.majorType==men})?
+({Token.string ==~ "(?i)under"}
+ ({Integer}):age)?):restriction
+-->
+:restriction.Restriction = { rule = restriction0, type = no, ethnicity = :eth@string, age = :age.Integer.value }
+
+Rule: restriction1
+({Token.string !=~ "(?i)no"})
+((( { Lookup.majorType == country_adj } | { Lookup.majorType == color, Lookup.minorType==skincolor } |  { Lookup.majorType == country_adj_plural }):eth)?
+({Lookup.majorType==men} | {Token.string ==~ "(?i)be"})
+({Token.string ==~ "(?i)over"} | ({Token.string ==~ "(?i)older"}{Token.kind==word}))
+ ({Integer}):age ):restriction
+-->
+:restriction.Restriction = { rule = restriction1, type = over, ethnicity = :eth@string, age = :age.Integer.value }
+
+Rule: restriction2
+(
+({Token.string ==~ "(?i)only"})?
+((( { Lookup.majorType == country_adj } | { Lookup.majorType == color, Lookup.minorType==skincolor } )? {Lookup.majorType==men}) |  { Lookup.majorType == country_adj_plural }):eth
+({Token.string ==~ "(?i)must|older|over"} ({Token})?)?
+({Integer} ({Lookup.majorType==age_unit})?):age
+({Token.string ==~ "(?i)&|and|or"} {Token.string ==~ "(?i)up|older"})
+({Token.string ==~ "(?i)only"})?
+):restriction
+-->
+:restriction.Restriction = { rule = restriction2, type = over, ethnicity = :eth@string, age = :age.Integer.value }
+

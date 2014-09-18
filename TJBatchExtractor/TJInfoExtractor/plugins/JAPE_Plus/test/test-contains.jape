@@ -1,0 +1,19 @@
+Phase:	Contains
+Input: A B C
+Options: control = appelt
+
+
+Rule: A
+({A contains {B@length==3}}):bind
+-->
+:bind.Out = {},
+:bind {
+  System.out.print("[");
+  boolean first = true;
+  for(Annotation ann: bindAnnots){
+    if(first) first = false; else System.out.print(", ");
+    System.out.print(ann.getId());
+  }
+  System.out.println("]");
+}
+

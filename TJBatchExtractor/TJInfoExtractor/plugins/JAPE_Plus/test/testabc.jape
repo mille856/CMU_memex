@@ -1,0 +1,32 @@
+Phase: ABC
+
+Input: A B C
+Options: control = appelt
+
+Rule: A
+(
+  {A}
+):a
+-->
+:a.TempA={}
+
+Rule: AB
+(
+  {A}{B}
+):a
+-->
+:a.TempAB={}
+
+Rule: ABC
+(
+  {A}{B}{C}
+):a
+-->
+:a.TempABC={}
+
+Rule: APlus
+(
+  ({A})+
+):a
+-->
+:a.TempAPlus={}

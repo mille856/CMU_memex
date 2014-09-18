@@ -1,0 +1,16 @@
+Phase:timepass3
+Input: Lookup Integer
+Options: control = first
+
+Rule: cleanPhoneNumber
+({Lookup.majorType == time_unit, !Lookup within Integer}):tm
+-->
+{  
+    AnnotationSet tmSet = bindings.get("tm");    
+    Long start = tmSet.firstNode().getOffset();
+    Long end = tmSet.lastNode().getOffset(); 
+
+     AnnotationSet toremove = inputAS.get(start,end).get("PhoneNumber");
+     if( toremove!=null) inputAS.removeAll(toremove);
+}
+

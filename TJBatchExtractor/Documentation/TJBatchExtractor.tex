@@ -1,0 +1,249 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage{xcolor}
+\usepackage{courier}
+
+\lstdefinestyle{Bash}
+{language=bash,
+basicstyle=\ttfamily\footnotesize,
+backgroundcolor=\color{gray!20},
+breaklines=true,
+breakatwhitespace=true
+}
+
+
+\begin{document}
+
+\title{{TJBatchExtractor}}
+\author{Kyle Miller}
+
+\maketitle
+
+\section{Introduction}
+This document describes the {TJBatchExtractor} project. This project is
+a regular expression based information extractor designed to operate on
+text captured from female escort advertisements originating from {US}
+sections of {B}ackpage.com. The motivation is to extract domain specific
+information that may be informative in identifying individuals or groups
+responsible for each advertisement. To that end, the information extracted
+focuses on physical description and contact information.
+
+The project is built upon {GATE} ({G}eneral {A}rchitecure for {T}ext
+{E}ngineering) produced by the {U}niversity of {S}heffield. {GATE} is
+available at 
+\begin{lstlisting}[style=Bash]
+https://gate.ac.uk.
+\end{lstlisting}
+All necessary dependencies for the 
+{TJBatchExtractor} projects are contained within this repository. It should
+not be necessary to download {GATE}. {GATE} may be useful however, if one
+wishes to modify this project an/or make use of the {GUI} and performance
+analysis machinery {GATE} provides.
+
+In the context of {GATE} applications, there are a few key phrases for which
+knowing the definitions may prove helpful. These are given below.
+
+\begin{description}
+\item[Language Resource] A document or collection of documents (corpus)
+\item[Processing Resource] A self contained program designed to consume and produce/modify annotations on text
+\item[Application] A collection of processing resources arranged in a pipeline
+\item[JAPE] A regular expression language that operates on annotations
+\item[Gazetteer] A look up table that produces annotations
+\end{description}
+
+\section{Components}
+
+The {TJBatchExtractor} project consists of the following components.
+
+\subsection{{TJBatchExtractor.java}}
+
+The java program {TJBatchExtractor.java} is a wrapper for the {GATE}
+application called {TJinformationExtractor}. It's function is to wrap
+{TJinformationExtractor} in such a way that it can load a text document and
+process many advertisements in parallel, finally writing the results to
+a csv file upon completion. {TJBatchExtractor.java} expects a single text
+file to be provided as input on which each line represents the text associated
+with an advertisement. Thus, it is necessary to remove line breaks from ad text.
+The program writes its results to a user specified file, "Out.csv" by default.
+
+To compile: 
+\begin{lstlisting}[style=Bash]
+$ javac -classpath '.:/dependencies/*' TJBatchExtractor.java
+\end{lstlisting}
+
+To run:
+\begin{lstlisting}[style=Bash]
+$ java -classpath '.:/dependencies/*' TJBatchExtractor [num_threads] [textfile] [outfile]
+\end{lstlisting}
+
+\subsubsection{Outfile}
+
+The following is a description of the features extracted,
+their definitions, and notes about notation. Many features
+may be multi-valued (e.g. names, phone numbers). 
+In such cases, the output file uses ';' to 
+delimit values within ',' delimited fields.
+
+It should be noted that many of these features have not been
+normalized. So, for example, blond and blonde may both 
+appear as hair colors, despite having the same interpretation.
+
+
+\begin{description}
+\item[Perspective\_1st] Count of 1st person pronouns
+\item[Perspective\_3rd] Count of 3rd person pronouns
+\item[Name] Female first names
+\item[Age] Age
+\item[Cost] Dollar figure charged for various services. Notation is given as Dollar/Measure/Unit. Dollar represents a cost, Unit represents object of the cost (e.g. hours, minutes, short stay, special, etc.), Measure represents the number of units (e.g. 30 minutes, 1 hour, hhr, etc.)
+\item[Height\_ft] Height in feet, multiple values correlate with multiple values of Height\_in
+\item[Height\_in] Remaining inches of height, correlates with Height\_ft
+\item[Weight] Weight in lbs
+\item[Cup] Cup size
+\item[Chest] Chest measurement
+\item[Waist] Waist measurement
+\item[Hip] Hip measurement
+\item[Ethnicity] Country referenced ethnicity (e.g. Spanish, Russian, etc.)
+\item[SkinColor] Color of skin
+\item[EyeColor] Color of eyes
+\item[HairColor] Color of hair
+\item[Restriction\_Type] One of [no, over]; the type of restriction, i.e. "no black men", or "only men over 45."
+\item[Restriction\_Ethnicity] The ethnicity/ skin color restricted
+\item[Restriction\_Age] The threshold age value for the over restrictions
+\item[PhoneNumber] Phone number
+\item[AreaCode\_State] State associated with phone number's area code
+\item[AreaCode\_Cities] Cities/ locations associated with phone number's area code
+\item[Email] Email address
+\item[Url] urls specifically referenced or linked to in the body
+\item[Media] iframes and other foreign sourced content
+\end{description}
+
+\section{{TJinformationExtractor}}
+
+{TJinformationExtractor} is a {GATE} application, the definition of which is
+stored in 
+\begin{lstlisting}[style=Bash]
+/TJInfoExtractor/application.xgapp.
+\end{lstlisting} The xgapp file may be loaded directly into {GATE} by selecting
+"{Restore Application from File...}" allowing one to make use of the {GATE} interface.
+
+This pipeline makes use of 
+the {ANNIE} {E}nglish {T}okeniser that ships with {GATE}, two custom processing
+resources {I}nteger\_{T}agger and {P}hone\_{N}umber\_{T}agger, an {ANNIE} {G}azetteer,
+and {JAPE}-{P}lus transducer. The application begins by tokenizing the text. It then
+identifies all token/sequences of tokens that could be interpreted as an integer. Next, it
+identifies phone numbers ({US} and {C}anada). Finally, it identifies other features
+and attempts to resolve conflicts. Note that the entire application has been configured to 
+be case insensitive.
+
+\subsection{{Integer Tagger}}
+The integer tagger is a processing resource that identifies references to integers
+in noisy (possibly obfuscated) text. The source can be found in 
+\begin{lstlisting}[style=Bash]
+/TJInfoExtractor/plugins/Tagger_Integer/src/gate/creole/integers/.
+\end{lstlisting} It produces the "Integer" annotation. Each integer
+annotation indicates the type ("numbers", "words", or "wordsAndNumbers"), numeric value, and
+whether any leading zeros are present. 
+
+The resource can be set to respect token boundaries (set to false in this application), 
+sentence boundaries (set to false in this application, requires the use of a sentence splitter prior
+to integer tagger in the pipeline), and dictionary entries (set to true in this application). If set to true, {respectTokenBoundaries} 
+prevents the resource from annotating a set of characters that cross
+token boundaries as an integer. If set to true, {respectSentenceBoundaries} prevents the resource
+from annotating a set of characters that cross sentence boundaries as an integer. If set to true, respectDictionaryEntries 
+prevents the resource from annotating characters that are contained within a token that appears in the dictionary as an integer. 
+For example, "one" in will be tagged as an integer in "some one" but not in "a cone." 
+
+The resource makes use of dictionaries of integer characters, symbols, and dictionary words. These files are located in
+\begin{lstlisting}[style=Bash]
+/TJInfoExtractor/plugins/Tagger_Integer/resources/languages/.
+\end{lstlisting} Standard numerical symbols 0-9 are hard coded into the resource.
+
+\subsection{{Phone Number Tagger}}
+The phone number tagger is a processing resource that identifies references to US and Canadian
+phone numbers. The source can be found in 
+\begin{lstlisting}[style=Bash]
+/TJInfoExtractor/plugins/Tagger_PhoneNumber/src/gate/creole/phonenumbers/.
+\end{lstlisting} The resource 
+can be configured to find both 10 digit and 7 digit phone numbers (both true by default). The tagger can also
+be configured to respect sentence boundaries as described above (set to false in this application).
+
+The resource produces the "{PhoneNumber}" annotation including the state, region, and value associated to a phone number.
+This resource finds groups of integers, annotated by the integer tagger, that are separated by no more than
+two word tokens (as indicated by the tokenizer). Note, an unlimited amount of punctuation may separate integers and 
+they will still be grouped together. Each group of numbers is then analyzed for subgroups of size 7, 10, or 11 that have the
+following properties. 11 digit groups must begin with 1. The area code in 10 and 11 digit groups must be valid according to
+an area code dictionary located in 
+\begin{lstlisting}[style=Bash]
+/TJInfoExtractor/plugins/Tagger_PhoneNumber/resources/.
+\end{lstlisting} For all groups the prefix (first 
+three digits following the area code) must not begin with a 1 nor end in 11.
+
+Finally, for larger groups of digits, phone numbers are tagged in a left first greedy fashion modulated by preferences on digit subgrouping.
+In this context, digits are considered in the same subgroup if there are no non-white space tokens between them. 10 and 11 digit phone numbers are preferred over 7 digit numbers.
+11 digit numbers are treated as 10 digit numbers, ignoring the first digit. For 10 digit numbers preference is given to subgrouping sizes according to the following order
+3-3-4, 10, 1-1-1-1-1-1-1-1-1-1, *-3-4, 3-7, 3-*, 6-4, *, where * indicates arbitrary digit subgroupings. For 7 digit numbers digit numbers, digit subgrouping sizes must be 
+one of the following (in order of preference) 3-4, 7, 1-1-1-1-1-1-1.
+
+\subsection{{ANNIE Gazetteer}}
+
+The gazetteer lists can be found in 
+\begin{lstlisting}[style=Bash]
+/TJInfoExtractror/application-resources/TJ_Gazetteer/.
+\end{lstlisting} This gazetteer resource
+contains look up tables for prefixes, key words, and suffixes associated to the features of interest (e.g. colors, hair, eyes,
+names, cup size, etc.). Occurrences of these tokens are annotated for use by the {JAPE} transducer.
+
+\subsection{{JAPE-Plus Transducer}}
+
+{JAPE} is a regular expression language for {GATE} that operates over annotations. The {JAPE} transducer creates or 
+modifies annotations based on matches to rule patterns. The jape files containing the {JAPE} rules for this application
+are contained in 
+\begin{lstlisting}[style=Bash]
+/TJInfoExtractor/application-resources/jape_transducers/.
+\end{lstlisting}
+Each rule file is run in the order specified in {TJ\_Annotation.jape}. These rules try to match common linguistic patterns
+employed when mentioning each feature. Ultimately they are responsible for creating the feature annotations as well as resolving
+conflicts between annotations. 
+
+\section{Performance}
+Below are performance measures for the features extracted, measured on
+1000 randomly selected ads, adjudicated by hand.
+
+Features that have sub-features such as height, cost, and restrictions, are
+evaluated on match of all sub-features for the purposes of this evaluation.
+Also, note that here the age feature is evaluated only on age mentions in the body of
+an add. While it is common to indicate age in the ad title, this extractor was specifically
+constructed to operate on the body.
+
+\begin{description}
+\item[Prevalence] The count of feature occurrence/ number of ads
+\item[Correct] The count of feature occurrences correctly extracted
+\item[Partial] The count of feature occurrences extracted, albeit incorrectly
+\item[Missing] The count of feature occurrences missed (i.e. false negatives)
+\item[False pos] The count of falsely identified occurrences
+\end{description}
+
+\begin{small}
+\begin{center}
+\begin{tabular}{l c c c c c c c c}
+Feature & Prevalence & Correct & Partial & Missing & False Pos & Recall & Precision & F-measure \\ \hline
+Age        & 0.067  & 49   &   0   &    18   &   1   &      0.731 &  0.980  &    0.838  \\
+Cost       & 0.55   & 489  &   0   &    61   &   17  &      0.889 &  0.966  &    0.926 \\
+Email      & 0.012  & 12   &   0   &    0    &   0   &      1.000 &  1.000  &    1.000 \\
+Ethnicity  & 0.29   & 254  &   0   &    36   &   8   &      0.876 &  0.969  &    0.920 \\
+EyeColor   & 0.106  & 102  &   0   &    4    &   0   &      0.962 &  1.000  &    0.981 \\ 
+HairColor  & 0.266  & 255  &   4   &    7    &   1   &      0.959 &  0.981  &    0.970 \\
+Name       & 0.993  & 795  &   7   &    191  &   85  &      0.801 &  0.896  &    0.846 \\
+PhoneNumber & 1.077 & 1072 &   2   &    3    &   0   &      0.995 &  0.998  &    0.997 \\
+Restriction & 0.069 & 56   &   2   &    11   &   1   &      0.812 &  0.949  &    0.875 \\
+SkinColor  & 0.105  & 102  &   0   &    3    &   3   &      0.971 &  0.971  &    0.971 \\
+Url        & 0.047  & 41   &   5   &    1    &   2   &      0.872 &  0.854  &    0.863 \\
+Height     & 0.236  & 227  &   3   &    6    &   2   &      0.962 &  0.978  &    0.970 \\
+Measurement & 0.206 & 182  &   16  &    8    &   0   &      0.883 &  0.919  &    0.901 \\
+Weight     & 0.182  & 166  &   4   &    12   &   0   &      0.912 &  0.976  &    0.943 \\
+\end{tabular}
+\end{center}
+\end{small}
+
+\end{document}

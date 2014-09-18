@@ -1,0 +1,41 @@
+Imports: {
+  import java.math.BigInteger;  
+}
+
+Phase:numbercleanzeros
+Input: Token Integer SpaceToken Lookup
+Options: control = appelt
+
+Rule: IntegerClean
+(({ Integer.type == numbers } ({ Integer.type == words, Integer@length==1, !Lookup })+)+):num
+-->
+{
+   AnnotationSet numSet = ((AnnotationSet)bindings.get("num")).get("Integer");
+   long start = numSet.firstNode().getOffset();
+   long end = numSet.lastNode().getOffset();
+
+   Iterator<Annotation> Iter = numSet.inDocumentOrder().iterator();
+   BigInteger value = BigInteger.valueOf(0);
+   while(Iter.hasNext()){
+     Annotation Num = Iter.next();
+     Integer digits = Num.getFeatures().get("value").toString().length();
+     value = value.multiply( BigInteger.valueOf((long)Math.round(Math.pow(10, digits))) );
+     value = value.add( (BigInteger) Num.getFeatures().get("value") );
+   }   
+   
+   FeatureMap features = Factory.newFeatureMap(); 
+   features.put("value", value );
+   features.put("rule", "IntegerClean");
+   features.put("type", "wordsAndNumbers");
+
+   inputAS.removeAll(numSet);
+
+   try {  
+      outputAS.add(start,end, "Integer", features);
+   } catch(InvalidOffsetException ioe){
+      throw new LuckyException(ioe);
+   }
+}
+
+
+
