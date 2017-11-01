@@ -1,13 +1,15 @@
 TJBatchExtractor
 =================
 note: requires java 7. (developed and tested on openjdk-1.7), will fail on java 8.
+
 Usage:
 Compile using
-$ javac -classpath '.:./dependencies/*' TJBatchExtractor.java
+\$ javac -classpath '.:./dependencies/*' TJBatchExtractor.java
 
 Run using
-$ java -classpath '.:./dependencies/*' TJBatchExtractor [num_threads] [textfile] [outfile]
-=================
+\$ java -classpath '.:./dependencies/*' TJBatchExtractor [num_threads] [textfile] [outfile]
+
+
 This project is a regular expression based information extractor designed to operate on
 text captured from female escort advertisements originating from {US}
 sections of Backpage.com. The motivation is to extract domain specific
